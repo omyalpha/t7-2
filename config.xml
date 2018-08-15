@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.tahweelapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>KIA</name>
+    <name>Tahweel</name>
     <description>
-        Tahweel
+        Tahweel App
     </description>
     <author email="info@tahweelapp.com" href="http://phonegap.com">
         OD13

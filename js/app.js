@@ -11,7 +11,14 @@ $$(document).on("pageInit", function(e) {
 			data: dataString, // send token to grab data
 			success: function(data) {
 			   obj = JSON.parse(data);
-				$('.myname').html(obj[0].name);
+			   localStorage.setItem("id",obj[0].id);
+			   localStorage.setItem("name",obj[0].name);
+			   localStorage.setItem("country",obj[0].country);
+			   localStorage.setItem("mobile",obj[0].mobile);
+			   localStorage.setItem("username",obj[0].username);
+			   localStorage.setItem("email",obj[0].email);
+			   localStorage.setItem("created",obj[0].created);
+			   $('.myname').html(obj[0].name);
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				alert(XMLHttpRequest.responseText);
@@ -19,9 +26,15 @@ $$(document).on("pageInit", function(e) {
 		});
 		$('#loginli').hide();
 		$('#logoutli').show();
+		$('#settingsli').show();
+		$('#mylistings').show();
+		$('#savedlistings').show();
 	} else {
 		$('#loginli').show();
 		$('#logoutli').hide();
+		$('#settingsli').hide();
+		$('#mylistings').hide();
+		$('#savedlistings').hide();
 		$('.myname').text("Not logged in");
 	}
 	
@@ -42,14 +55,22 @@ $$(document).on("pageInit", function(e) {
 			url: "http://www.webhosting.sd/~tahweel/php/signup.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
-			   alert("Account created!"); // show response from the php script.
+			   myApp.addNotification({
+					message: "Account created"
+			   });
 			   localStorage.setItem("token",data);
 			   $('#loginli').hide();
 			   $('#logoutli').show();
+			   $('#settingsli').show();
+			   $('#mylistings').show();
+			   $('#savedlistings').show();
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
-				alert(XMLHttpRequest.responseText);
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
 			}
 		});
        });
@@ -72,10 +93,16 @@ $$(document).on("pageInit", function(e) {
 			   localStorage.setItem("token",data);
 			   $('#loginli').hide();
 		   	   $('#logoutli').show();
+			   $('#settingsli').show();
+			   $('#mylistings').show();
+			   $('#savedlistings').show();
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
-				alert(XMLHttpRequest.responseText);
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
 			}
 		});
        });
@@ -95,11 +122,54 @@ $$(document).on("pageInit", function(e) {
 			url: "http://www.webhosting.sd/~tahweel/php/resetpass.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
-			   alert(data); // show response from the php script.
+				myApp.addNotification({
+					message: data
+				});
+				//alert(data); // show response from the php script.
+				mainView.loadPage('index.html');
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
+			}
+		});
+       });
+	}
+	
+	if (page.name === 'settings') {
+		console.log('settings page');
+		$("#token").val(localStorage.getItem("token"));
+		$("#name").val(localStorage.getItem("name"));
+		$("#country").val(localStorage.getItem("country"));
+		$("#mobile").val(localStorage.getItem("mobile"));
+		$("#email").val(localStorage.getItem("email"));
+		$("#username").val(localStorage.getItem("username"));
+		$$(".updateBtn").on('click', function(e){
+		var form = $("#settingsForm");
+		
+		//run Ajax script here
+		$.ajax({
+			beforeSend: function() { myApp.showIndicator(); },
+			complete: function(){ myApp.hideIndicator(); },
+			type: "GET",
+			url: "http://www.webhosting.sd/~tahweel/php/update.php",
+			data: form.serialize(), // serializes the form's elements.
+			success: function(data) {
+			   myApp.addNotification({
+					message: "Account updated"
+			   });
+			   localStorage.setItem("token",data);
+			   $('#loginli').hide();
+			   $('#logoutli').show();
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
-				alert(XMLHttpRequest.responseText);
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
 			}
 		});
        });
@@ -112,6 +182,9 @@ $$(document).on("pageInit", function(e) {
 		localStorage.clear();
 		$('#loginli').show();
 		$('#logoutli').hide();
+		$('#settingsli').hide();
+		$('#mylistings').hide();
+		$('#savedlistings').hide();
 		console.log('logged out');
 		$('.myname').text("Not logged in");
 		mainView.loadPage('index.html');
@@ -133,14 +206,23 @@ $$(document).on("pageInit", function(e) {
 				$('.myname').html(obj[0].name);
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
-				alert(XMLHttpRequest.responseText);
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
 			}
 		});
 		$('#loginli').hide();
 		$('#logoutli').show();
+		$('#settingsli').show();
+		$('#mylistings').show();
+		$('#savedlistings').show();
 	} else {
 		$('#loginli').show();
 		$('#logoutli').hide();
+		$('#settingsli').hide();
+		$('#mylistings').hide();
+		$('#savedlistings').hide();
 		$('.myname').text("Not logged in");
 	}
 });
