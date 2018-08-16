@@ -154,15 +154,12 @@ $$(document).on("pageInit", function(e) {
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
 			type: "GET",
-			url: "http://www.webhosting.sd/~tahweel/php/update.php",
+			url: "http://www.webhosting.sd/~tahweel/php/settings.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 			   myApp.addNotification({
 					message: "Account updated"
 			   });
-			   localStorage.setItem("token",data);
-			   $('#loginli').hide();
-			   $('#logoutli').show();
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -173,6 +170,212 @@ $$(document).on("pageInit", function(e) {
 			}
 		});
        });
+	}
+	
+	if (page.name === 'fromsudan') {
+		console.log('from sudan page');
+		var divText="";
+		//run Ajax script here
+		$.ajax({
+			beforeSend: function() { myApp.showIndicator(); },
+			complete: function(){ myApp.hideIndicator(); },
+			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?type=1",
+			dataType: "jsonp",
+			jsonpCallback: "jsonCallback",
+			success:function jsonCallback(data){
+				$.each(data, function(i, field){
+					divText += '<li><div class="item-content">';
+					divText += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+					divText += '<div class="item-title-row">';
+					divText += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+					divText += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+					divText += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+					divText += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+					divText += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+					divText += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+					divText += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+				});
+				$('#divTextArea').html(divText);
+				if (data=="") {
+					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
+			}
+		});
+	}
+	
+	if (page.name === 'tosudan') {
+		console.log('to sudan page');
+		var divText="";
+		//run Ajax script here
+		$.ajax({
+			beforeSend: function() { myApp.showIndicator(); },
+			complete: function(){ myApp.hideIndicator(); },
+			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?type=2",
+			dataType: "jsonp",
+			jsonpCallback: "jsonCallback",
+			success:function jsonCallback(data){
+				$.each(data, function(i, field){
+					divText += '<li><div class="item-content">';
+					divText += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+					divText += '<div class="item-title-row">';
+					divText += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+					divText += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+					divText += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+					divText += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+					divText += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+					divText += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+					divText += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+				});
+				$('#divTextArea').html(divText);
+				if (data=="") {
+					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
+			}
+		});
+	}
+	
+	if (page.name === 'domestic') {
+		console.log('domestic page');
+		var divText="";
+		//run Ajax script here
+		$.ajax({
+			beforeSend: function() { myApp.showIndicator(); },
+			complete: function(){ myApp.hideIndicator(); },
+			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?type=3",
+			dataType: "jsonp",
+			jsonpCallback: "jsonCallback",
+			success:function jsonCallback(data){
+				$.each(data, function(i, field){
+					divText += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+					divText += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+					divText += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+					divText += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+					divText += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+
+				});
+				$('#divTextArea').html(divText);
+				if (data=="") {
+					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
+			}
+		});
+	}
+	
+	if (page.name === 'exchange') {
+		console.log('exchange page');
+		var divText="";
+		//run Ajax script here
+		$.ajax({
+			beforeSend: function() { myApp.showIndicator(); },
+			complete: function(){ myApp.hideIndicator(); },
+			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?type=4",
+			dataType: "jsonp",
+			jsonpCallback: "jsonCallback",
+			success:function jsonCallback(data){
+				$.each(data, function(i, field){
+					divText += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+					divText += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+					divText += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+					divText += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+					divText += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+					
+					divText += '<li><div class="item-content"><div class="item-media"><img src="img/exchange-icon.png" width="80"/></div>';
+					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle font-green">I want to give:</div>';
+					divText += '<div class="item-after font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div>';
+					divText += '<div class="item-title-row"><div class="item-subtitle font-red">And receive:</div>';
+					divText += '<div class="item-after font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div></div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-map-marker"></i> ' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div>';
+					divText += '</div></div><a class="button button-link readmore" href="details.html"><i class="fa fa-eye"></i> View Details</a></li>';
+
+				});
+				$('#divTextArea').html(divText);
+				if (data=="") {
+					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
+			}
+		});
+	}
+	
+	if (page.name === 'details') {
+		console.log('details page');
+		var getid = page.query.listingid;
+		console.log(getid);
+		var divText="";
+		//run Ajax script here
+		$.ajax({
+			beforeSend: function() { myApp.showIndicator(); },
+			complete: function(){ myApp.hideIndicator(); },
+			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?listingid="+getid,
+			dataType: "jsonp",
+			jsonpCallback: "jsonCallback",
+			success:function jsonCallback(data){
+				$.each(data, function(i, field){
+					divText += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+					divText += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+					divText += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+					divText += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+					divText += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+					
+					divText += '<li><div class="item-content"><div class="item-media"><img src="img/exchange-icon.png" width="80"/></div>';
+					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle font-green">I want to give:</div>';
+					divText += '<div class="item-after font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div>';
+					divText += '<div class="item-title-row"><div class="item-subtitle font-red">And receive:</div>';
+					divText += '<div class="item-after font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div></div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-map-marker"></i> ' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div>';
+					divText += '</div></div><a class="button button-link readmore" href="details.html"><i class="fa fa-eye"></i> View Details</a></li>';
+
+				});
+				$('#divTextArea').html(divText);
+				if (data=="") {
+					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
+			}
+		});
 	}
 	
 	
