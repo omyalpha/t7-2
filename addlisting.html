@@ -1,0 +1,802 @@
+<div data-page="addlisting" class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+      <div class="center">Add Listing</div>
+    </div>
+  </div>
+  <div class="page-content login-screen-content">
+    <form id="addlistingForm">
+      <div class="list-block inputs-list">
+	  <div class="space"></div>
+        <ul>
+		  <li class="item-content">
+            <div class="item-inner space"> 
+              <div class="item-title label">Please Choose</div>
+              <div class="item-input">
+				<input type="hidden" name="token" id="token"/>
+                <select name="type" id="type" class="no-fastclick">
+					<option value="1">I Want To Send Money From Sudan</option>
+					<option value="2">I Want To Send Money To Sudan</option>
+					<option value="3">I Want To Send Money Locally</option>
+					<option value="4">I Want To Exchange Currency</option>
+                </select>
+              </div>
+            </div>
+          </li>
+		  <p class="font-green">I want to give:</p>
+		  <li class="item-content" id="fromcurrency">
+            <div class="item-inner"> 
+              <div class="item-title label font-green">Currency</div>
+              <div class="item-input">
+                <select name="fromcurrency">
+					<option value="SDG">Sudan Pounds – SDG</option>
+					<option value="USD">United States Dollars – USD</option>
+					<option value="GBP">United Kingdom Pounds – GBP</option>
+					<option value="EUR">Euro – EUR</option>
+					<option value="AED">United Arab Emirates Dirhams – AED</option>
+					<option value="SAR">Saudi Arabia Riyals – SAR</option>
+					<option value="EGP">Egypt Pounds – EGP</option>
+					<option value="QAR">Qatar Riyals – QAR</option>
+					<option value="">--------------------</option>
+					<option value="AFN">Afghanistan Afghanis – AFN</option>
+					<option value="ALL">Albania Leke – ALL</option>
+					<option value="DZD">Algeria Dinars – DZD</option>
+					<option value="ARS">Argentina Pesos – ARS</option>
+					<option value="AUD">Australia Dollars – AUD</option>
+					<option value="ATS">Austria Schillings – ATS</OPTION>
+					<option value="BSD">Bahamas Dollars – BSD</option>
+					<option value="BHD">Bahrain Dinars – BHD</option>
+					<option value="BDT">Bangladesh Taka – BDT</option>
+					<option value="BBD">Barbados Dollars – BBD</option>
+					<option value="BEF">Belgium Francs – BEF</OPTION>
+					<option value="BMD">Bermuda Dollars – BMD</option>
+					<option value="BRL">Brazil Reais – BRL</option>
+					<option value="BGN">Bulgaria Leva – BGN</option>
+					<option value="CAD">Canada Dollars – CAD</option>
+					<option value="XOF">CFA BCEAO Francs – XOF</option>
+					<option value="XAF">CFA BEAC Francs – XAF</option>
+					<option value="CLP">Chile Pesos – CLP</option>
+					<option value="CNY">China Yuan Renminbi – CNY</option>
+					<option value="COP">Colombia Pesos – COP</option>
+					<option value="XPF">CFP Francs – XPF</option>
+					<option value="CRC">Costa Rica Colones – CRC</option>
+					<option value="HRK">Croatia Kuna – HRK</option>
+					<option value="CYP">Cyprus Pounds – CYP</option>
+					<option value="CZK">Czech Republic Koruny – CZK</option>
+					<option value="DKK">Denmark Kroner – DKK</option>
+					<option value="DOP">Dominican Republic Pesos – DOP</option>
+					<option value="XCD">Eastern Caribbean Dollars – XCD</option>
+					<option value="EEK">Estonia Krooni – EEK</option>
+					<option value="FJD">Fiji Dollars – FJD</option>
+					<option value="XAU">Gold Ounces – XAU</option>
+					<option value="GTQ">Guatemalan Quetzal – GTQ</OPTION>
+					<option value="HKD">Hong Kong Dollars – HKD</option>
+					<option value="HUF">Hungary Forint – HUF</option>
+					<option value="ISK">Iceland Krona – ISK</option>
+					<option value="INR">India Rupees – INR</option>
+					<option value="IDR">Indonesia Rupiahs – IDR</option>
+					<option value="IRR">Iran Rials – IRR</option>
+					<option value="IQD">Iraq Dinars – IQD</option>
+					<option value="JMD">Jamaica Dollars – JMD</option>
+					<option value="JPY">Japan Yen – JPY</option>
+					<option value="JOD">Jordan Dinars – JOD</option>
+					<option value="KES">Kenya Shillings – KES</option>
+					<option value="KWD">Kuwait Dinars – KWD</option>
+					<option value="LBP">Lebanon Pounds – LBP</option>
+					<option value="MYR">Malaysia Ringgits – MYR</option>
+					<option value="MTL">Malta Liri – MTL</option>
+					<option value="MUR">Mauritius Rupees – MUR</option>
+					<option value="MXN">Mexico Pesos – MXN</option>
+					<option value="MAD">Morocco Dirhams – MAD</option>
+					<option value="NZD">New Zealand Dollars – NZD</option>
+					<option value="NOK">Norway Kroner – NOK</option>
+					<option value="OMR">Oman Rials – OMR</option>
+					<option value="PKR">Pakistan Rupees – PKR</option>
+					<option value="XPD">Palladium Ounces – XPD</option>
+					<option value="PEN">Peru Nuevos Soles – PEN</option>
+					<option value="PHP">Philippines Pesos – PHP</option>
+					<option value="XPT">Platinum Ounces – XPT</option>
+					<option value="PLN">Poland Zlotych – PLN</option>
+					<option value="PTE">Portugal Escudos – PTE</OPTION>
+					<option value="RON">Romania New Leu – RON</option>
+					<option value="RUB">Russia Rubles – RUB</option>
+					<option value="XAG">Silver Ounces – XAG</option>
+					<option value="SGD">Singapore Dollars – SGD</option> 
+					<option value="SIT">Slovenia Tolars – SIT</option>
+					<option value="ZAR">South Africa Rand – ZAR</option>
+					<option value="KRW">South Korea Won – KRW</option>
+					<option value="LKR">Sri Lanka Rupees – LKR</option>
+					<option value="SEK">Sweden Krona – SEK</option>
+					<option value="CHF">Switzerland Francs – CHF</option>
+					<option value="TWD">Taiwan New Dollars – TWD</option>
+					<option value="THB">Thailand Baht – THB</option>
+					<option value="TTD">Trinidad and Tobago Dollars – TTD</option>
+					<option value="TND">Tunisia Dinars – TND</option>
+					<option value="TRY">Turkey New Lira – TRY</option>
+					<option value="VEB">Venezuela Bolivares – VEB</option>
+					<option value="VND">Vietnam Dong – VND</option>
+					<option value="ZMK">Zambia Kwacha – ZMK</option>
+                </select>
+              </div>
+            </div>
+          </li>
+		  <li class="item-content" id="fromamount">
+            <div class="item-inner"> 
+              <div class="item-title label margin-left margin-bottom font-green">Amount</div>
+              <div class="item-input">
+                <input type="text" name="fromamount" placeholder="Amount"/>
+              </div>
+            </div>
+          </li>
+		  <li class="item-content" id="fromcountry" style="display:none">
+            <div class="item-inner"> 
+              <div class="item-title label font-green">Country</div>
+              <div class="item-input">
+                <select name="fromcountry">
+					<option>Afghanistan</option>
+					<option>Åland Islands</option>
+					<option>Albania</option>
+					<option>Algeria</option>
+					<option>American Samoa</option>
+					<option>Andorra</option>
+					<option>Angola</option>
+					<option>Anguilla</option>
+					<option>Antarctica</option>
+					<option>Antigua and Barbuda</option>
+					<option>Argentina</option>
+					<option>Armenia</option>
+					<option>Aruba</option>
+					<option>Australia</option>
+					<option>Austria</option>
+					<option>Azerbaijan</option>
+					<option>Bahamas</option>
+					<option>Bahrain</option>
+					<option>Bangladesh</option>
+					<option>Barbados</option>
+					<option>Belarus</option>
+					<option>Belgium</option>
+					<option>Belize</option>
+					<option>Benin</option>
+					<option>Bermuda</option>
+					<option>Bhutan</option>
+					<option>Bolivia, Plurinational State of</option>
+					<option>Bonaire, Sint Eustatius and Saba</option>
+					<option>Bosnia and Herzegovina</option>
+					<option>Botswana</option>
+					<option>Bouvet Island</option>
+					<option>Brazil</option>
+					<option>British Indian Ocean Territory</option>
+					<option>Brunei Darussalam</option>
+					<option>Bulgaria</option>
+					<option>Burkina Faso</option>
+					<option>Burundi</option>
+					<option>Cambodia</option>
+					<option>Cameroon</option>
+					<option>Canada</option>
+					<option>Cape Verde</option>
+					<option>Cayman Islands</option>
+					<option>Central African Republic</option>
+					<option>Chad</option>
+					<option>Chile</option>
+					<option>China</option>
+					<option>Christmas Island</option>
+					<option>Cocos (Keeling) Islands</option>
+					<option>Colombia</option>
+					<option>Comoros</option>
+					<option>Congo</option>
+					<option>Congo, the Democratic Republic of the</option>
+					<option>Cook Islands</option>
+					<option>Costa Rica</option>
+					<option>Côte d'Ivoire</option>
+					<option>Croatia</option>
+					<option>Cuba</option>
+					<option>Curaçao</option>
+					<option>Cyprus</option>
+					<option>Czech Republic</option>
+					<option>Denmark</option>
+					<option>Djibouti</option>
+					<option>Dominica</option>
+					<option>Dominican Republic</option>
+					<option>Ecuador</option>
+					<option>Egypt</option>
+					<option>El Salvador</option>
+					<option>Equatorial Guinea</option>
+					<option>Eritrea</option>
+					<option>Estonia</option>
+					<option>Ethiopia</option>
+					<option>Falkland Islands (Malvinas)</option>
+					<option>Faroe Islands</option>
+					<option>Fiji</option>
+					<option>Finland</option>
+					<option>France</option>
+					<option>French Guiana</option>
+					<option>French Polynesia</option>
+					<option>French Southern Territories</option>
+					<option>Gabon</option>
+					<option>Gambia</option>
+					<option>Georgia</option>
+					<option>Germany</option>
+					<option>Ghana</option>
+					<option>Gibraltar</option>
+					<option>Greece</option>
+					<option>Greenland</option>
+					<option>Grenada</option>
+					<option>Guadeloupe</option>
+					<option>Guam</option>
+					<option>Guatemala</option>
+					<option>Guernsey</option>
+					<option>Guinea</option>
+					<option>Guinea-Bissau</option>
+					<option>Guyana</option>
+					<option>Haiti</option>
+					<option>Heard Island and McDonald Islands</option>
+					<option>Holy See (Vatican City State)</option>
+					<option>Honduras</option>
+					<option>Hong Kong</option>
+					<option>Hungary</option>
+					<option>Iceland</option>
+					<option>India</option>
+					<option>Indonesia</option>
+					<option>Iran, Islamic Republic of</option>
+					<option>Iraq</option>
+					<option>Ireland</option>
+					<option>Isle of Man</option>
+					<option>Israel</option>
+					<option>Italy</option>
+					<option>Jamaica</option>
+					<option>Japan</option>
+					<option>Jersey</option>
+					<option>Jordan</option>
+					<option>Kazakhstan</option>
+					<option>Kenya</option>
+					<option>Kiribati</option>
+					<option>Korea, Democratic People's Republic of</option>
+					<option>Korea, Republic of</option>
+					<option>Kuwait</option>
+					<option>Kyrgyzstan</option>
+					<option>Lao People's Democratic Republic</option>
+					<option>Latvia</option>
+					<option>Lebanon</option>
+					<option>Lesotho</option>
+					<option>Liberia</option>
+					<option>Libya</option>
+					<option>Liechtenstein</option>
+					<option>Lithuania</option>
+					<option>Luxembourg</option>
+					<option>Macao</option>
+					<option>Macedonia, the former Yugoslav Republic of</option>
+					<option>Madagascar</option>
+					<option>Malawi</option>
+					<option>Malaysia</option>
+					<option>Maldives</option>
+					<option>Mali</option>
+					<option>Malta</option>
+					<option>Marshall Islands</option>
+					<option>Martinique</option>
+					<option>Mauritania</option>
+					<option>Mauritius</option>
+					<option>Mayotte</option>
+					<option>Mexico</option>
+					<option>Micronesia, Federated States of</option>
+					<option>Moldova, Republic of</option>
+					<option>Monaco</option>
+					<option>Mongolia</option>
+					<option>Montenegro</option>
+					<option>Montserrat</option>
+					<option>Morocco</option>
+					<option>Mozambique</option>
+					<option>Myanmar</option>
+					<option>Namibia</option>
+					<option>Nauru</option>
+					<option>Nepal</option>
+					<option>Netherlands</option>
+					<option>New Caledonia</option>
+					<option>New Zealand</option>
+					<option>Nicaragua</option>
+					<option>Niger</option>
+					<option>Nigeria</option>
+					<option>Niue</option>
+					<option>Norfolk Island</option>
+					<option>Northern Mariana Islands</option>
+					<option>Norway</option>
+					<option>Oman</option>
+					<option>Pakistan</option>
+					<option>Palau</option>
+					<option>Palestinian Territory, Occupied</option>
+					<option>Panama</option>
+					<option>Papua New Guinea</option>
+					<option>Paraguay</option>
+					<option>Peru</option>
+					<option>Philippines</option>
+					<option>Pitcairn</option>
+					<option>Poland</option>
+					<option>Portugal</option>
+					<option>Puerto Rico</option>
+					<option>Qatar</option>
+					<option>Réunion</option>
+					<option>Romania</option>
+					<option>Russian Federation</option>
+					<option>Rwanda</option>
+					<option>Saint Barthélemy</option>
+					<option>Saint Helena, Ascension and Tristan da Cunha</option>
+					<option>Saint Kitts and Nevis</option>
+					<option>Saint Lucia</option>
+					<option>Saint Martin (French part)</option>
+					<option>Saint Pierre and Miquelon</option>
+					<option>Saint Vincent and the Grenadines</option>
+					<option>Samoa</option>
+					<option>San Marino</option>
+					<option>Sao Tome and Principe</option>
+					<option>Saudi Arabia</option>
+					<option>Senegal</option>
+					<option>Serbia</option>
+					<option>Seychelles</option>
+					<option>Sierra Leone</option>
+					<option>Singapore</option>
+					<option>Sint Maarten (Dutch part)</option>
+					<option>Slovakia</option>
+					<option>Slovenia</option>
+					<option>Solomon Islands</option>
+					<option>Somalia</option>
+					<option>South Africa</option>
+					<option>South Georgia and the South Sandwich Islands</option>
+					<option>South Sudan</option>
+					<option>Spain</option>
+					<option>Sri Lanka</option>
+					<option>Suriname</option>
+					<option>Svalbard and Jan Mayen</option>
+					<option>Swaziland</option>
+					<option>Sweden</option>
+					<option>Switzerland</option>
+					<option>Syrian Arab Republic</option>
+					<option>Taiwan, Province of China</option>
+					<option>Tajikistan</option>
+					<option>Tanzania, United Republic of</option>
+					<option>Thailand</option>
+					<option>Timor-Leste</option>
+					<option>Togo</option>
+					<option>Tokelau</option>
+					<option>Tonga</option>
+					<option>Trinidad and Tobago</option>
+					<option>Tunisia</option>
+					<option>Turkey</option>
+					<option>Turkmenistan</option>
+					<option>Turks and Caicos Islands</option>
+					<option>Tuvalu</option>
+					<option>Uganda</option>
+					<option>Ukraine</option>
+					<option>United Arab Emirates</option>
+					<option>United Kingdom</option>
+					<option>United States</option>
+					<option>United States Minor Outlying Islands</option>
+					<option>Uruguay</option>
+					<option>Uzbekistan</option>
+					<option>Vanuatu</option>
+					<option>Venezuela, Bolivarian Republic of</option>
+					<option>Viet Nam</option>
+					<option>Virgin Islands, British</option>
+					<option>Virgin Islands, U.S.</option>
+					<option>Wallis and Futuna</option>
+					<option>Western Sahara</option>
+					<option>Yemen</option>
+					<option>Zambia</option>
+					<option>Zimbabwe</option>
+                </select>
+              </div>
+            </div>
+          </li>
+		  <li class="item-content" id="fromsudan">
+            <div class="item-inner">
+			  <div class="item-title label margin-left margin-bottom font-green">Country</div>
+              <div class="item-title label margin-left margin-bottom sudan">Sudan</div>
+            </div>
+          </li>
+		  <li class="item-content" id="fromcity">
+            <div class="item-inner"> 
+              <div class="item-title label margin-left margin-bottom font-green">City / State</div>
+              <div class="item-input">
+                <input type="text" name="fromcity" placeholder="City / State"/>
+              </div>
+            </div>
+          </li>
+		  <p class="font-red">I want to receive:</p>
+		  <li class="item-content"id="tocurrency">
+            <div class="item-inner"> 
+              <div class="item-title label font-red">Currency</div>
+              <div class="item-input">
+                <select name="tocurrency">
+					<option value="SDG">Sudan Pounds – SDG</option>
+					<option value="USD">United States Dollars – USD</option>
+					<option value="GBP">United Kingdom Pounds – GBP</option>
+					<option value="EUR">Euro – EUR</option>
+					<option value="AED">United Arab Emirates Dirhams – AED</option>
+					<option value="SAR">Saudi Arabia Riyals – SAR</option>
+					<option value="EGP">Egypt Pounds – EGP</option>
+					<option value="QAR">Qatar Riyals – QAR</option>
+					<option value="">--------------------</option>
+					<option value="AFN">Afghanistan Afghanis – AFN</option>
+					<option value="ALL">Albania Leke – ALL</option>
+					<option value="DZD">Algeria Dinars – DZD</option>
+					<option value="ARS">Argentina Pesos – ARS</option>
+					<option value="AUD">Australia Dollars – AUD</option>
+					<option value="ATS">Austria Schillings – ATS</OPTION>
+					<option value="BSD">Bahamas Dollars – BSD</option>
+					<option value="BHD">Bahrain Dinars – BHD</option>
+					<option value="BDT">Bangladesh Taka – BDT</option>
+					<option value="BBD">Barbados Dollars – BBD</option>
+					<option value="BEF">Belgium Francs – BEF</OPTION>
+					<option value="BMD">Bermuda Dollars – BMD</option>
+					<option value="BRL">Brazil Reais – BRL</option>
+					<option value="BGN">Bulgaria Leva – BGN</option>
+					<option value="CAD">Canada Dollars – CAD</option>
+					<option value="XOF">CFA BCEAO Francs – XOF</option>
+					<option value="XAF">CFA BEAC Francs – XAF</option>
+					<option value="CLP">Chile Pesos – CLP</option>
+					<option value="CNY">China Yuan Renminbi – CNY</option>
+					<option value="COP">Colombia Pesos – COP</option>
+					<option value="XPF">CFP Francs – XPF</option>
+					<option value="CRC">Costa Rica Colones – CRC</option>
+					<option value="HRK">Croatia Kuna – HRK</option>
+					<option value="CYP">Cyprus Pounds – CYP</option>
+					<option value="CZK">Czech Republic Koruny – CZK</option>
+					<option value="DKK">Denmark Kroner – DKK</option>
+					<option value="DOP">Dominican Republic Pesos – DOP</option>
+					<option value="XCD">Eastern Caribbean Dollars – XCD</option>
+					<option value="EEK">Estonia Krooni – EEK</option>
+					<option value="FJD">Fiji Dollars – FJD</option>
+					<option value="XAU">Gold Ounces – XAU</option>
+					<option value="GTQ">Guatemalan Quetzal – GTQ</OPTION>
+					<option value="HKD">Hong Kong Dollars – HKD</option>
+					<option value="HUF">Hungary Forint – HUF</option>
+					<option value="ISK">Iceland Krona – ISK</option>
+					<option value="INR">India Rupees – INR</option>
+					<option value="IDR">Indonesia Rupiahs – IDR</option>
+					<option value="IRR">Iran Rials – IRR</option>
+					<option value="IQD">Iraq Dinars – IQD</option>
+					<option value="JMD">Jamaica Dollars – JMD</option>
+					<option value="JPY">Japan Yen – JPY</option>
+					<option value="JOD">Jordan Dinars – JOD</option>
+					<option value="KES">Kenya Shillings – KES</option>
+					<option value="KWD">Kuwait Dinars – KWD</option>
+					<option value="LBP">Lebanon Pounds – LBP</option>
+					<option value="MYR">Malaysia Ringgits – MYR</option>
+					<option value="MTL">Malta Liri – MTL</option>
+					<option value="MUR">Mauritius Rupees – MUR</option>
+					<option value="MXN">Mexico Pesos – MXN</option>
+					<option value="MAD">Morocco Dirhams – MAD</option>
+					<option value="NZD">New Zealand Dollars – NZD</option>
+					<option value="NOK">Norway Kroner – NOK</option>
+					<option value="OMR">Oman Rials – OMR</option>
+					<option value="PKR">Pakistan Rupees – PKR</option>
+					<option value="XPD">Palladium Ounces – XPD</option>
+					<option value="PEN">Peru Nuevos Soles – PEN</option>
+					<option value="PHP">Philippines Pesos – PHP</option>
+					<option value="XPT">Platinum Ounces – XPT</option>
+					<option value="PLN">Poland Zlotych – PLN</option>
+					<option value="PTE">Portugal Escudos – PTE</OPTION>
+					<option value="RON">Romania New Leu – RON</option>
+					<option value="RUB">Russia Rubles – RUB</option>
+					<option value="XAG">Silver Ounces – XAG</option>
+					<option value="SGD">Singapore Dollars – SGD</option> 
+					<option value="SIT">Slovenia Tolars – SIT</option>
+					<option value="ZAR">South Africa Rand – ZAR</option>
+					<option value="KRW">South Korea Won – KRW</option>
+					<option value="LKR">Sri Lanka Rupees – LKR</option>
+					<option value="SEK">Sweden Krona – SEK</option>
+					<option value="CHF">Switzerland Francs – CHF</option>
+					<option value="TWD">Taiwan New Dollars – TWD</option>
+					<option value="THB">Thailand Baht – THB</option>
+					<option value="TTD">Trinidad and Tobago Dollars – TTD</option>
+					<option value="TND">Tunisia Dinars – TND</option>
+					<option value="TRY">Turkey New Lira – TRY</option>
+					<option value="VEB">Venezuela Bolivares – VEB</option>
+					<option value="VND">Vietnam Dong – VND</option>
+					<option value="ZMK">Zambia Kwacha – ZMK</option>
+                </select>
+              </div>
+            </div>
+          </li>
+		  <li class="item-content" id="toamount">
+            <div class="item-inner"> 
+              <div class="item-title label margin-left margin-bottom font-red">Amount</div>
+              <div class="item-input">
+                <input type="text" name="toamount" placeholder="Amount"/>
+              </div>
+            </div>
+          </li>
+		  <li class="item-content" id="tocountry">
+            <div class="item-inner"> 
+              <div class="item-title label font-red">Country</div>
+              <div class="item-input">
+                <select name="tocountry">
+					<option>Afghanistan</option>
+					<option>Åland Islands</option>
+					<option>Albania</option>
+					<option>Algeria</option>
+					<option>American Samoa</option>
+					<option>Andorra</option>
+					<option>Angola</option>
+					<option>Anguilla</option>
+					<option>Antarctica</option>
+					<option>Antigua and Barbuda</option>
+					<option>Argentina</option>
+					<option>Armenia</option>
+					<option>Aruba</option>
+					<option>Australia</option>
+					<option>Austria</option>
+					<option>Azerbaijan</option>
+					<option>Bahamas</option>
+					<option>Bahrain</option>
+					<option>Bangladesh</option>
+					<option>Barbados</option>
+					<option>Belarus</option>
+					<option>Belgium</option>
+					<option>Belize</option>
+					<option>Benin</option>
+					<option>Bermuda</option>
+					<option>Bhutan</option>
+					<option>Bolivia, Plurinational State of</option>
+					<option>Bonaire, Sint Eustatius and Saba</option>
+					<option>Bosnia and Herzegovina</option>
+					<option>Botswana</option>
+					<option>Bouvet Island</option>
+					<option>Brazil</option>
+					<option>British Indian Ocean Territory</option>
+					<option>Brunei Darussalam</option>
+					<option>Bulgaria</option>
+					<option>Burkina Faso</option>
+					<option>Burundi</option>
+					<option>Cambodia</option>
+					<option>Cameroon</option>
+					<option>Canada</option>
+					<option>Cape Verde</option>
+					<option>Cayman Islands</option>
+					<option>Central African Republic</option>
+					<option>Chad</option>
+					<option>Chile</option>
+					<option>China</option>
+					<option>Christmas Island</option>
+					<option>Cocos (Keeling) Islands</option>
+					<option>Colombia</option>
+					<option>Comoros</option>
+					<option>Congo</option>
+					<option>Congo, the Democratic Republic of the</option>
+					<option>Cook Islands</option>
+					<option>Costa Rica</option>
+					<option>Côte d'Ivoire</option>
+					<option>Croatia</option>
+					<option>Cuba</option>
+					<option>Curaçao</option>
+					<option>Cyprus</option>
+					<option>Czech Republic</option>
+					<option>Denmark</option>
+					<option>Djibouti</option>
+					<option>Dominica</option>
+					<option>Dominican Republic</option>
+					<option>Ecuador</option>
+					<option>Egypt</option>
+					<option>El Salvador</option>
+					<option>Equatorial Guinea</option>
+					<option>Eritrea</option>
+					<option>Estonia</option>
+					<option>Ethiopia</option>
+					<option>Falkland Islands (Malvinas)</option>
+					<option>Faroe Islands</option>
+					<option>Fiji</option>
+					<option>Finland</option>
+					<option>France</option>
+					<option>French Guiana</option>
+					<option>French Polynesia</option>
+					<option>French Southern Territories</option>
+					<option>Gabon</option>
+					<option>Gambia</option>
+					<option>Georgia</option>
+					<option>Germany</option>
+					<option>Ghana</option>
+					<option>Gibraltar</option>
+					<option>Greece</option>
+					<option>Greenland</option>
+					<option>Grenada</option>
+					<option>Guadeloupe</option>
+					<option>Guam</option>
+					<option>Guatemala</option>
+					<option>Guernsey</option>
+					<option>Guinea</option>
+					<option>Guinea-Bissau</option>
+					<option>Guyana</option>
+					<option>Haiti</option>
+					<option>Heard Island and McDonald Islands</option>
+					<option>Holy See (Vatican City State)</option>
+					<option>Honduras</option>
+					<option>Hong Kong</option>
+					<option>Hungary</option>
+					<option>Iceland</option>
+					<option>India</option>
+					<option>Indonesia</option>
+					<option>Iran, Islamic Republic of</option>
+					<option>Iraq</option>
+					<option>Ireland</option>
+					<option>Isle of Man</option>
+					<option>Israel</option>
+					<option>Italy</option>
+					<option>Jamaica</option>
+					<option>Japan</option>
+					<option>Jersey</option>
+					<option>Jordan</option>
+					<option>Kazakhstan</option>
+					<option>Kenya</option>
+					<option>Kiribati</option>
+					<option>Korea, Democratic People's Republic of</option>
+					<option>Korea, Republic of</option>
+					<option>Kuwait</option>
+					<option>Kyrgyzstan</option>
+					<option>Lao People's Democratic Republic</option>
+					<option>Latvia</option>
+					<option>Lebanon</option>
+					<option>Lesotho</option>
+					<option>Liberia</option>
+					<option>Libya</option>
+					<option>Liechtenstein</option>
+					<option>Lithuania</option>
+					<option>Luxembourg</option>
+					<option>Macao</option>
+					<option>Macedonia, the former Yugoslav Republic of</option>
+					<option>Madagascar</option>
+					<option>Malawi</option>
+					<option>Malaysia</option>
+					<option>Maldives</option>
+					<option>Mali</option>
+					<option>Malta</option>
+					<option>Marshall Islands</option>
+					<option>Martinique</option>
+					<option>Mauritania</option>
+					<option>Mauritius</option>
+					<option>Mayotte</option>
+					<option>Mexico</option>
+					<option>Micronesia, Federated States of</option>
+					<option>Moldova, Republic of</option>
+					<option>Monaco</option>
+					<option>Mongolia</option>
+					<option>Montenegro</option>
+					<option>Montserrat</option>
+					<option>Morocco</option>
+					<option>Mozambique</option>
+					<option>Myanmar</option>
+					<option>Namibia</option>
+					<option>Nauru</option>
+					<option>Nepal</option>
+					<option>Netherlands</option>
+					<option>New Caledonia</option>
+					<option>New Zealand</option>
+					<option>Nicaragua</option>
+					<option>Niger</option>
+					<option>Nigeria</option>
+					<option>Niue</option>
+					<option>Norfolk Island</option>
+					<option>Northern Mariana Islands</option>
+					<option>Norway</option>
+					<option>Oman</option>
+					<option>Pakistan</option>
+					<option>Palau</option>
+					<option>Palestinian Territory, Occupied</option>
+					<option>Panama</option>
+					<option>Papua New Guinea</option>
+					<option>Paraguay</option>
+					<option>Peru</option>
+					<option>Philippines</option>
+					<option>Pitcairn</option>
+					<option>Poland</option>
+					<option>Portugal</option>
+					<option>Puerto Rico</option>
+					<option>Qatar</option>
+					<option>Réunion</option>
+					<option>Romania</option>
+					<option>Russian Federation</option>
+					<option>Rwanda</option>
+					<option>Saint Barthélemy</option>
+					<option>Saint Helena, Ascension and Tristan da Cunha</option>
+					<option>Saint Kitts and Nevis</option>
+					<option>Saint Lucia</option>
+					<option>Saint Martin (French part)</option>
+					<option>Saint Pierre and Miquelon</option>
+					<option>Saint Vincent and the Grenadines</option>
+					<option>Samoa</option>
+					<option>San Marino</option>
+					<option>Sao Tome and Principe</option>
+					<option>Saudi Arabia</option>
+					<option>Senegal</option>
+					<option>Serbia</option>
+					<option>Seychelles</option>
+					<option>Sierra Leone</option>
+					<option>Singapore</option>
+					<option>Sint Maarten (Dutch part)</option>
+					<option>Slovakia</option>
+					<option>Slovenia</option>
+					<option>Solomon Islands</option>
+					<option>Somalia</option>
+					<option>South Africa</option>
+					<option>South Georgia and the South Sandwich Islands</option>
+					<option>South Sudan</option>
+					<option>Spain</option>
+					<option>Sri Lanka</option>
+					<option>Suriname</option>
+					<option>Svalbard and Jan Mayen</option>
+					<option>Swaziland</option>
+					<option>Sweden</option>
+					<option>Switzerland</option>
+					<option>Syrian Arab Republic</option>
+					<option>Taiwan, Province of China</option>
+					<option>Tajikistan</option>
+					<option>Tanzania, United Republic of</option>
+					<option>Thailand</option>
+					<option>Timor-Leste</option>
+					<option>Togo</option>
+					<option>Tokelau</option>
+					<option>Tonga</option>
+					<option>Trinidad and Tobago</option>
+					<option>Tunisia</option>
+					<option>Turkey</option>
+					<option>Turkmenistan</option>
+					<option>Turks and Caicos Islands</option>
+					<option>Tuvalu</option>
+					<option>Uganda</option>
+					<option>Ukraine</option>
+					<option>United Arab Emirates</option>
+					<option>United Kingdom</option>
+					<option>United States</option>
+					<option>United States Minor Outlying Islands</option>
+					<option>Uruguay</option>
+					<option>Uzbekistan</option>
+					<option>Vanuatu</option>
+					<option>Venezuela, Bolivarian Republic of</option>
+					<option>Viet Nam</option>
+					<option>Virgin Islands, British</option>
+					<option>Virgin Islands, U.S.</option>
+					<option>Wallis and Futuna</option>
+					<option>Western Sahara</option>
+					<option>Yemen</option>
+					<option>Zambia</option>
+					<option>Zimbabwe</option>
+                </select>
+              </div>
+            </div>
+          </li>
+		  <li class="item-content" id="tosudan" style="display:none">
+            <div class="item-inner">
+			<div class="item-title label margin-left margin-bottom font-red">Country</div>
+              <div class="item-title label margin-left margin-bottom sudan">Sudan</div>
+            </div>
+          </li>
+		  <li class="item-content" id="tocity">
+            <div class="item-inner"> 
+              <div class="item-title label margin-left margin-bottom font-red">City / State</div>
+              <div class="item-input">
+                <input type="text" name="tocity" placeholder="City / State"/>
+              </div>
+            </div>
+          </li>
+		  <li class="item-content" id="exchangecity" style="display:none">
+            <div class="item-inner"> 
+              <div class="item-title label margin-left margin-bottom">City / State</div>
+              <div class="item-input">
+                <input type="text" name="exchangecity" placeholder="City / State"/>
+              </div>
+            </div>
+          </li>
+		  <li class="item-content">
+            <div class="item-inner"> 
+              <div class="item-title label">Comment (Optional)</div>
+              <div class="item-input">
+                <input type="text" name="comment" placeholder="Comment"/>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="content-block"><a href="#" class="button button-raised button-fill color-bluegray ripple-blue addlistingBtn">Add Listing</a></div>
+      <div class="content-block">
+      </div>
+    </form>
+  </div>
+</div>

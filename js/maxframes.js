@@ -2,7 +2,8 @@
 var myApp = new Framework7({
     modalTitle: "Tahweel",
     // Enable Material theme
-    material: true
+    material: true,
+	notificationHold: 10000,
 });
 
 // Expose Internal DOM library

@@ -29,13 +29,15 @@ $$(document).on("pageInit", function(e) {
 		$('#settingsli').show();
 		$('#mylistings').show();
 		$('#savedlistings').show();
+		$('#addlisting').show();
 	} else {
 		$('#loginli').show();
 		$('#logoutli').hide();
 		$('#settingsli').hide();
 		$('#mylistings').hide();
 		$('#savedlistings').hide();
-		$('.myname').text("Not logged in");
+		$('#addlisting').hide();
+		$('.myname').text("");
 	}
 	
     var page = e.detail.page;
@@ -64,6 +66,7 @@ $$(document).on("pageInit", function(e) {
 			   $('#settingsli').show();
 			   $('#mylistings').show();
 			   $('#savedlistings').show();
+			   $('#addlisting').show();
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -96,6 +99,7 @@ $$(document).on("pageInit", function(e) {
 			   $('#settingsli').show();
 			   $('#mylistings').show();
 			   $('#savedlistings').show();
+			   $('#addlisting').show();
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -378,7 +382,97 @@ $$(document).on("pageInit", function(e) {
 		});
 	}
 	
-	
+	if (page.name === 'addlisting') {
+		console.log('add listing page');
+		
+		$("#token").val(localStorage.getItem("token"));
+		$('#type').on('change', function() {
+			value = this.value;
+		
+			if (value=="1") { // from sudan
+			console.log('1');
+				$('#fromcurrency').show();
+				$('#fromamount').show();
+				$('#fromcountry').hide();
+				$('#fromsudan').show();
+				$('#fromcity').show();
+				$('#tocurrency').show();
+				$('#toamount').show();
+				$('#tocountry').show();
+				$('#tosudan').hide();
+				$('#tocity').show();
+				$('#exchangecity').hide();
+				$('#comment').show();
+			} else if (value=="2") { // to sudan
+			console.log('2');
+				$('#fromcurrency').show();
+				$('#fromamount').show();
+				$('#fromcountry').show();
+				$('#fromsudan').hide();
+				$('#fromcity').show();
+				$('#tocurrency').show();
+				$('#toamount').show();
+				$('#tocountry').hide();
+				$('#tosudan').show();
+				$('#tocity').show();
+				$('#exchangecity').hide();
+				$('#comment').show();
+			} else if (value=="3") { // domestic
+			console.log('3');
+				$('#fromcurrency').show();
+				$('#fromamount').show();
+				$('#fromcountry').hide();
+				$('#fromsudan').show();
+				$('#fromcity').show();
+				$('#tocurrency').show();
+				$('#toamount').show();
+				$('#tocountry').hide();
+				$('#tosudan').show();
+				$('#tocity').show();
+				$('#exchangecity').hide();
+				$('#comment').show();
+			} else if (value=="4") { // exchange
+			console.log('4');
+				$('#fromcurrency').show();
+				$('#fromamount').show();
+				$('#fromcountry').hide();
+				$('#fromsudan').show();
+				$('#fromcity').hide();
+				$('#tocurrency').show();
+				$('#toamount').show();
+				$('#tocountry').hide();
+				$('#tosudan').show();
+				$('#tocity').hide();
+				$('#exchangecity').show();
+				$('#comment').show();
+			}
+		});
+		//run Ajax script here
+		$$(".addlistingBtn").on('click', function(e){
+			var form = $("#addlistingForm");
+			
+			//run Ajax script here
+			$.ajax({
+				beforeSend: function() { myApp.showIndicator(); },
+				complete: function(){ myApp.hideIndicator(); },
+				type: "GET",
+				url: "http://www.webhosting.sd/~tahweel/php/addlisting.php",
+				data: form.serialize(), // serializes the form's elements.
+				success: function(data) {
+				   myApp.addNotification({
+						message: "Listing added successfully"
+				   });
+				   mainView.loadPage('index.html');
+				},
+				error:function(XMLHttpRequest,textStatus,errorThrown){
+					var errormsg=XMLHttpRequest.responseText;
+					myApp.addNotification({
+						message: errormsg
+					});
+				}
+			});
+		   });
+	}
 
 }), $(document).ready(function() {
 	$$(".logout").on('click', function(e){
@@ -388,10 +482,12 @@ $$(document).on("pageInit", function(e) {
 		$('#settingsli').hide();
 		$('#mylistings').hide();
 		$('#savedlistings').hide();
+		$('#addlisting').hide();
 		console.log('logged out');
-		$('.myname').text("Not logged in");
+		$('.myname').text("");
 		mainView.loadPage('index.html');
 	});
+	
 	// check login
 	console.log('initialized with jquery');
 	if (localStorage.getItem("token") !== null) {
@@ -420,12 +516,14 @@ $$(document).on("pageInit", function(e) {
 		$('#settingsli').show();
 		$('#mylistings').show();
 		$('#savedlistings').show();
+		$('#addlisting').show();
 	} else {
 		$('#loginli').show();
 		$('#logoutli').hide();
 		$('#settingsli').hide();
 		$('#mylistings').hide();
 		$('#savedlistings').hide();
-		$('.myname').text("Not logged in");
+		$('#addlisting').hide();
+		$('.myname').text("");
 	}
 });
