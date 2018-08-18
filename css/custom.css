@@ -1,8 +1,3 @@
-.myname-old {
-	font-size: 16px;
-	text-transform: uppercase;
-	padding-left: 3px;
-}
 .sudan {
 	font-size: 16px !important;
 }
@@ -14,4 +9,12 @@
 .readmore {
 	color:#ffffff !important;
 	background-color:#607d8b !important;
+}
+
+.detailsul {
+  list-style: none;
+}
+
+.detailscolor {
+    background-color: #F7F7F7;
 }

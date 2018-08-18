@@ -1,3 +1,85 @@
+// Init App
+var myApp = new Framework7({
+    modalTitle: "Tahweel",
+    // Enable Material theme
+    material: true,
+	notificationHold: 10000,
+});
+
+// Expose Internal DOM library
+var $$ = Dom7;
+
+// Add main view
+var mainView = myApp.addView('.view-main', {
+});
+
+
+// Show/hide preloader for remote ajax loaded pages
+// Probably should be removed on a production/local app
+$$(document).on('ajaxStart', function (e) {
+    myApp.showIndicator();
+});
+$$(document).on('ajaxComplete', function () {
+    myApp.hideIndicator();
+});
+
+/* ===== Pull To Refresh Demo ===== */
+myApp.onPageInit('contacts', function (page) {
+    // Dummy Content
+    var songs = ['Sheela Joshi', 'Boxer Car', 'Makbul Ahemad', 'Lia'];
+    var authors = ['India', 'Australia', 'Qatar', 'Clifornia'];
+    // Pull to refresh content
+    var ptrContent = $$(page.container).find('.pull-to-refresh-content');
+    // Add 'refresh' listener on it
+    ptrContent.on('refresh', function (e) {
+        // Emulate 2s loading
+        setTimeout(function () {
+            var picURL = 'img/pic1.png';
+            var song = songs[Math.floor(Math.random() * songs.length)];
+            var author = authors[Math.floor(Math.random() * authors.length)];
+            var linkHTML = '<li class="item-content">' +
+                                '<div class="item-media"><img src="' + picURL + '" width="44"/></div>' +
+                                '<div class="item-inner">' +
+                                    '<div class="item-title-row">' +
+                                        '<div class="item-title">' + song + '</div>' +
+                                    '</div>' +
+                                    '<div class="item-subtitle">' + author + '</div>' +
+                                '</div>' +
+                            '</li>';
+            ptrContent.find('ul').prepend(linkHTML);
+            // When loading done, we need to "close" it
+            myApp.pullToRefreshDone();
+        }, 2000);
+    });
+});
+
+/* ===== Color themes ===== */
+myApp.onPageInit('color-themes', function (page) {
+    $$(page.container).find('.ks-color-theme').click(function () {
+        var classList = $$('body')[0].classList;
+        for (var i = 0; i < classList.length; i++) {
+            if (classList[i].indexOf('theme') === 0) classList.remove(classList[i]);
+        }
+        classList.add('theme-' + $$(this).attr('data-theme'));
+    });
+    $$(page.container).find('.ks-layout-theme').click(function () {
+        var classList = $$('body')[0].classList;
+        for (var i = 0; i < classList.length; i++) {
+            if (classList[i].indexOf('layout-') === 0) classList.remove(classList[i]);
+        }
+        classList.add('layout-' + $$(this).attr('data-theme')); 
+    });
+});
+
+/* ===== Change statusbar bg when panel opened/closed ===== */
+$$('.panel-left').on('open', function () {
+    $$('.statusbar-overlay').addClass('with-panel-left');
+});
+
+$$('.panel-left, .panel-right').on('close', function () {
+    $$('.statusbar-overlay').removeClass('with-panel-left with-panel-right');
+});
+
 $$(document).on("pageInit", function(e) {
 	if (localStorage.getItem("token") !== null) {
 		var savedtoken = localStorage.getItem("token");
@@ -28,15 +110,17 @@ $$(document).on("pageInit", function(e) {
 		$('#logoutli').show();
 		$('#settingsli').show();
 		$('#mylistings').show();
-		$('#savedlistings').show();
 		$('#addlisting').show();
+		$('#savedlistings').show();
+		$('.speed-dial').show();
 	} else {
 		$('#loginli').show();
 		$('#logoutli').hide();
 		$('#settingsli').hide();
 		$('#mylistings').hide();
-		$('#savedlistings').hide();
 		$('#addlisting').hide();
+		$('#savedlistings').hide();
+		$('.speed-dial').hide();
 		$('.myname').text("");
 	}
 	
@@ -65,8 +149,9 @@ $$(document).on("pageInit", function(e) {
 			   $('#logoutli').show();
 			   $('#settingsli').show();
 			   $('#mylistings').show();
-			   $('#savedlistings').show();
 			   $('#addlisting').show();
+			   $('#savedlistings').show();
+			   $('.speed-dial').show();
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -98,8 +183,9 @@ $$(document).on("pageInit", function(e) {
 		   	   $('#logoutli').show();
 			   $('#settingsli').show();
 			   $('#mylistings').show();
-			   $('#savedlistings').show();
 			   $('#addlisting').show();
+			   $('#savedlistings').show();
+			   $('.speed-dial').show();
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -300,24 +386,17 @@ $$(document).on("pageInit", function(e) {
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
 				$.each(data, function(i, field){
-					divText += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
-					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
-					divText += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
-					divText += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
-					divText += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
-					divText += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
-					
-					divText += '<li><div class="item-content"><div class="item-media"><img src="img/exchange-icon.png" width="80"/></div>';
-					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle font-green">I want to give:</div>';
-					divText += '<div class="item-after font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div>';
-					divText += '<div class="item-title-row"><div class="item-subtitle font-red">And receive:</div>';
-					divText += '<div class="item-after font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div></div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-map-marker"></i> ' + data[i].from_city + ', ' + data[i].from_country + '</div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div>';
-					divText += '</div></div><a class="button button-link readmore" href="details.html"><i class="fa fa-eye"></i> View Details</a></li>';
+					divText += '<li><div class="item-content">';
+					divText += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+					divText += '<div class="item-title-row">';
+					divText += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+					divText += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+					divText += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+					divText += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+					divText += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+					divText += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+					divText += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 
 				});
 				$('#divTextArea').html(divText);
@@ -337,7 +416,9 @@ $$(document).on("pageInit", function(e) {
 	if (page.name === 'details') {
 		console.log('details page');
 		var getid = page.query.listingid;
+		//console.log(getid);
 		console.log(getid);
+		
 		var divText="";
 		//run Ajax script here
 		$.ajax({
@@ -347,30 +428,35 @@ $$(document).on("pageInit", function(e) {
 			dataType: "jsonp",
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
+				console.log(data);
 				$.each(data, function(i, field){
-					divText += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
-					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
-					divText += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
-					divText += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
-					divText += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
-					divText += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+					if (data[i].type==1) {
+					showimg="fromsudan-icon.png";
+					} else if (data[i].type==2) {
+						showimg="tosudan-icon.png";
+					} else if (data[i].type==3) {
+						showimg="domestic-icon.png";
+					} else if (data[i].type==4) {
+						showimg="exchange-icon.png";
+					}
 					
-					divText += '<li><div class="item-content"><div class="item-media"><img src="img/exchange-icon.png" width="80"/></div>';
-					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle font-green">I want to give:</div>';
-					divText += '<div class="item-after font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div>';
-					divText += '<div class="item-title-row"><div class="item-subtitle font-red">And receive:</div>';
-					divText += '<div class="item-after font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div></div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-map-marker"></i> ' + data[i].from_city + ', ' + data[i].from_country + '</div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div>';
-					divText += '</div></div><a class="button button-link readmore" href="details.html"><i class="fa fa-eye"></i> View Details</a></li>';
+					divText += '<li class="col-100"><img src="img/' + showimg + '" alt=""></li>';
+					divText += '<li class="detailscolor">#125</li>';
+					divText += '<li>I want to give:</li>';
+					divText += '<li class="font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</li>';
+					divText += '<li class="font-green">' + data[i].from_city + ', ' + data[i].from_country + '</li>';
+					divText += '<li>&nbsp</li>';
+					divText += '<li>I want to receive:</li>';
+					divText += '<li class="font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</li>';
+					divText += '<li class="font-red">' + data[i].to_city + ', ' + data[i].to_country + '</li>';
+					divText += '<li class="detailscolor"><i class="fa fa-comment-o"></i> ' + data[i].comment + '</li>';
+					divText += '<li class="detailscolor"><a href="userlistings.html?id=' + data[i].userid + '"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</a></li>';
+					divText += '<li class="detailscolor"><i class="fa fa-tablet"></i> ' + data[i].contact + '</li>';
 
 				});
-				$('#divTextArea').html(divText);
+				$('#divText').html(divText);
 				if (data=="") {
-					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+					$('#divText').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> This listing may be deleted or expired!</p></div>');
 				}
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -386,6 +472,7 @@ $$(document).on("pageInit", function(e) {
 		console.log('add listing page');
 		
 		$("#token").val(localStorage.getItem("token"));
+		$("#contact").val(localStorage.getItem("mobile") + ' - ' + localStorage.getItem("email"));
 		$('#type').on('change', function() {
 			value = this.value;
 		
@@ -473,6 +560,271 @@ $$(document).on("pageInit", function(e) {
 			});
 		   });
 	}
+	
+	if (page.name === 'userlistings') {
+		console.log('user listings page');
+		var getid = page.query.id;
+		//console.log(getid);
+		if (getid===undefined) { // if no id is set, show my listings
+			getid=localStorage.getItem("id");
+		}
+		console.log(getid);
+		
+		var activeListings="";
+		var expiredListings="";
+		//run Ajax script here
+		$.ajax({
+			beforeSend: function() { myApp.showIndicator(); },
+			complete: function(){ myApp.hideIndicator(); },
+			url: "http://www.webhosting.sd/~tahweel/php/userlistings.php?getid="+getid,
+			dataType: "jsonp",
+			jsonpCallback: "jsonCallback",
+			success:function jsonCallback(data){
+				$.each(data, function(i, field){
+					$('#nameofuser').text(data[i].nameofuser);
+
+					if (data[i].expired==0) {
+						if (data[i].type==1) { //fromsudan
+							activeListings += '<li><div class="item-content">';
+							activeListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							activeListings += '<div class="item-title-row">';
+							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							activeListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							activeListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							activeListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							activeListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							activeListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==2) { // tosudan
+							activeListings += '<li><div class="item-content">';
+							activeListings += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							activeListings += '<div class="item-title-row">';
+							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							activeListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							activeListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							activeListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							activeListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							activeListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==3) { // domestic
+							activeListings += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+							activeListings += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+							activeListings += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+							activeListings += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+							activeListings += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+							activeListings += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==4) { // exchange
+							activeListings += '<li><div class="item-content">';
+							activeListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							activeListings += '<div class="item-title-row">';
+							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							activeListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							activeListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							activeListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							activeListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							activeListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						}
+					} else if (data[i].expired==1) {
+						if (data[i].type==1) { //fromsudan
+							expiredListings += '<li><div class="item-content">';
+							expiredListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							expiredListings += '<div class="item-title-row">';
+							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							expiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							expiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							expiredListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==2) { // tosudan
+							expiredListings += '<li><div class="item-content">';
+							expiredListings += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							expiredListings += '<div class="item-title-row">';
+							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							expiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							expiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							expiredListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==3) { // domestic
+							expiredListings += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+							expiredListings += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+							expiredListings += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+							expiredListings += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+							expiredListings += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+							expiredListings += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==4) { // exchange
+							expiredListings += '<li><div class="item-content">';
+							expiredListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							expiredListings += '<div class="item-title-row">';
+							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							expiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							expiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							expiredListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						}
+					}
+				});
+				$('#activeListings').html(activeListings);
+				$('#expiredListings').html(expiredListings);
+				if (activeListings=="") {
+					$('#activeListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+				if (expiredListings=="") {
+					$('#expiredListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
+			}
+		});
+	}
+	
+	if (page.name === 'savedlistings') {
+		console.log('saved listings page');
+		
+		var activeListings="";
+		var expiredListings="";
+		//run Ajax script here
+		$.ajax({
+			beforeSend: function() { myApp.showIndicator(); },
+			complete: function(){ myApp.hideIndicator(); },
+			url: "http://www.webhosting.sd/~tahweel/php/savedlistings.php?token="+localStorage.getItem("token"),
+			dataType: "jsonp",
+			jsonpCallback: "jsonCallback",
+			success:function jsonCallback(data){
+				$.each(data, function(i, field){
+
+					if (data[i].expired==0) {
+						if (data[i].type==1) { //fromsudan
+							activeListings += '<li><div class="item-content">';
+							activeListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							activeListings += '<div class="item-title-row">';
+							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							activeListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							activeListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							activeListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							activeListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							activeListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==2) { // tosudan
+							activeListings += '<li><div class="item-content">';
+							activeListings += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							activeListings += '<div class="item-title-row">';
+							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							activeListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							activeListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							activeListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							activeListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							activeListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==3) { // domestic
+							activeListings += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+							activeListings += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+							activeListings += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+							activeListings += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+							activeListings += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+							activeListings += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==4) { // exchange
+							activeListings += '<li><div class="item-content">';
+							activeListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							activeListings += '<div class="item-title-row">';
+							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							activeListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							activeListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							activeListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							activeListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							activeListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						}
+					} else if (data[i].expired==1) {
+						if (data[i].type==1) { //fromsudan
+							expiredListings += '<li><div class="item-content">';
+							expiredListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							expiredListings += '<div class="item-title-row">';
+							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							expiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							expiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							expiredListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==2) { // tosudan
+							expiredListings += '<li><div class="item-content">';
+							expiredListings += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							expiredListings += '<div class="item-title-row">';
+							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							expiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							expiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							expiredListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==3) { // domestic
+							expiredListings += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+							expiredListings += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+							expiredListings += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+							expiredListings += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+							expiredListings += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+							expiredListings += '<a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						} else if (data[i].type==4) { // exchange
+							expiredListings += '<li><div class="item-content">';
+							expiredListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle">I want to give:</div>';
+							expiredListings += '<div class="item-title-row">';
+							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							expiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle">And receive:</div><div class="item-title-row">';
+							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							expiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							expiredListings += '</div><a class="button button-link readmore" href="details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						}
+					}
+				});
+				$('#activeListings').html(activeListings);
+				$('#expiredListings').html(expiredListings);
+				if (activeListings=="") {
+					$('#activeListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+				if (expiredListings=="") {
+					$('#expiredListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				}
+			},
+			error:function(XMLHttpRequest,textStatus,errorThrown){
+				var errormsg=XMLHttpRequest.responseText;
+				myApp.addNotification({
+					message: errormsg
+				});
+			}
+		});
+	}
 
 }), $(document).ready(function() {
 	$$(".logout").on('click', function(e){
@@ -481,8 +833,9 @@ $$(document).on("pageInit", function(e) {
 		$('#logoutli').hide();
 		$('#settingsli').hide();
 		$('#mylistings').hide();
-		$('#savedlistings').hide();
 		$('#addlisting').hide();
+		$('#savedlistings').hide();
+		$('.speed-dial').hide();
 		console.log('logged out');
 		$('.myname').text("");
 		mainView.loadPage('index.html');
@@ -515,15 +868,17 @@ $$(document).on("pageInit", function(e) {
 		$('#logoutli').show();
 		$('#settingsli').show();
 		$('#mylistings').show();
-		$('#savedlistings').show();
 		$('#addlisting').show();
+		$('#savedlistings').show();
+		$('.speed-dial').show();
 	} else {
 		$('#loginli').show();
 		$('#logoutli').hide();
 		$('#settingsli').hide();
 		$('#mylistings').hide();
-		$('#savedlistings').hide();
 		$('#addlisting').hide();
+		$('#savedlistings').hide();
+		$('.speed-dial').hide();
 		$('.myname').text("");
 	}
 });
