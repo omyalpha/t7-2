@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#2196f3">
+<title>تحويل</title>
+
+<!-- CSS link goes here -->
+<link rel="stylesheet" href="css/framework7.material.min.css">
+<link rel="stylesheet" href="css/framework7.material.rtl.min.css">
+<link rel="stylesheet" href="css/framework7.material.colors.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/maxframes.css">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="theme-bluegray">
+<div class="statusbar-overlay"></div>
+<div class="panel-overlay"></div>
+<div class="panel panel-right panel-reveal sidebar">
+  <div class="view">
+    <div class=" ">
+      <div data-page="panel-right" class="sidemenu leftmenusmall gradient">
+	  <a href="indexar.html" class="close-panel"><img src="img/logo-white.png" width="100%"/></a>
+
+        <div class="clear"></div>
+        <div class="list-block accordion-list">
+              <ul class="menu">
+                  <li><a href="ar/international.html" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-caret-left"></i><span>&nbsp; تحويلات خارجية </span></div></a></li> 
+                  <li><a href="ar/domestic.html" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-caret-left"></i><span>&nbsp; تحويلات محلية </span></div></a></li> 
+                  <li><a href="ar/exchange.html" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-caret-left"></i><span>&nbsp; تغيير عملة </span></div></a></li>
+                  <li id="addlisting"><a href="ar/addlisting.html" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-plus"></i><span>&nbsp; إضافة إعلان </span></div></a></li>
+				  <li id="mylistings"><a href="ar/userlistings.html" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-list-alt"></i><span>&nbsp; إعلاناتي </span></div></a></li>
+				  <li id="savedlistings"><a href="ar/savedlistings.html" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-save"></i><span>&nbsp; الإعلانات المحفوظة </span></div></a></li>
+                  <li id="settingsli"><a href="ar/settings.html" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-sliders"></i><span>&nbsp; إعدادات </span></div></a></li>
+                  <li><a href="index.html" class="external close-panel item-content"><div class="itemmeniinner"><i class="fa fa-globe"></i><span>&nbsp;English Version</span></div></a></li>
+                  <li onclick="window.plugins.socialsharing.share('Tahweel App', null, null, 'http://www.tahweelapp.online/')"><a href="#" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-share-alt"></i><span>&nbsp; مشاركة </span></div></a></li>
+                  <li id="loginli"><a href="ar/login.html" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-sign-in"></i><span>&nbsp; تسجيل الدخول </span></div></a></li>
+				  <li id="logoutli" class="logout"><a href="#" class="item-link close-panel item-content "><div class="itemmeniinner"><i class="fa fa-sign-out"></i><span>&nbsp; تسجيل الخروج </span></div></a></li>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+<div class="views pageview" >
+  <div class="view view-main">
+    <div class="pages">
+	<div data-page="home" class="page navbar-fixed">
+	  <div class="navbar ">
+		<div class="navbar-inner">
+			<div class="left sliding"><a href="#" data-panel="left" class="open-panel link icon-only"><i class="fa fa-bars"></i></a></div>
+			<div class="center ">الرئيسية</div>
+		</div>
+	  </div>
+	  <div class="speed-dial"><a href="ar/addlisting.html" class="floating-button"><i class="icon icon-plus"></i><i class="icon icon-close"></i></a></div>
+	  <div class="page-content" >
+		<div class="card ks-card-header-pic">
+		  <a href="ar/fromsudan.html"><img src="img/fromsudan-ar.png" width="100%"/></a>
+		</div>
+		<div class="card ks-card-header-pic">
+		  <a href="ar/tosudan.html"><img src="img/tosudan-ar.png" width="100%"/></a>
+		</div>
+		<div class="card ks-card-header-pic">
+		  <a href="ar/domestic.html"><img src="img/domestic-ar.png" width="100%"/></a>
+		</div>
+		<div class="card ks-card-header-pic">
+		  <a href="ar/exchange.html"><img src="img/exchange-ar.png" width="100%"/></a>
+		</div>
+	  </div>
+	</div>
+	</div>
+  </div>
+</div>
+
+
+<!-- JS link goes here --> 
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script> 
+<script type="text/javascript" src="js/framework7.min.js"></script> 
+<script type="text/javascript" src="js/app-ar.js"></script>
+</body>
+</html>
