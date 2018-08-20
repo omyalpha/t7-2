@@ -23,36 +23,6 @@ $$(document).on('ajaxComplete', function () {
     myApp.hideIndicator();
 });
 
-/* ===== Pull To Refresh Demo ===== */
-myApp.onPageInit('contacts', function (page) {
-    // Dummy Content
-    var songs = ['Sheela Joshi', 'Boxer Car', 'Makbul Ahemad', 'Lia'];
-    var authors = ['India', 'Australia', 'Qatar', 'Clifornia'];
-    // Pull to refresh content
-    var ptrContent = $$(page.container).find('.pull-to-refresh-content');
-    // Add 'refresh' listener on it
-    ptrContent.on('refresh', function (e) {
-        // Emulate 2s loading
-        setTimeout(function () {
-            var picURL = 'img/pic1.png';
-            var song = songs[Math.floor(Math.random() * songs.length)];
-            var author = authors[Math.floor(Math.random() * authors.length)];
-            var linkHTML = '<li class="item-content">' +
-                                '<div class="item-media"><img src="' + picURL + '" width="44"/></div>' +
-                                '<div class="item-inner">' +
-                                    '<div class="item-title-row">' +
-                                        '<div class="item-title">' + song + '</div>' +
-                                    '</div>' +
-                                    '<div class="item-subtitle">' + author + '</div>' +
-                                '</div>' +
-                            '</li>';
-            ptrContent.find('ul').prepend(linkHTML);
-            // When loading done, we need to "close" it
-            myApp.pullToRefreshDone();
-        }, 2000);
-    });
-});
-
 /* ===== Color themes ===== */
 myApp.onPageInit('color-themes', function (page) {
     $$(page.container).find('.ks-color-theme').click(function () {
@@ -126,6 +96,15 @@ $$(document).on("pageInit", function(e) {
 	
     var page = e.detail.page;
 	console.log('initialized');
+	
+	// delay search ajax
+	var delay = (function(){
+	  var timer = 0;
+	  return function(callback, ms){
+		clearTimeout (timer);
+		timer = setTimeout(callback, ms);
+	  };
+	})();
 	
 	if (page.name === 'signup') {
 		console.log('signup page');
@@ -264,7 +243,6 @@ $$(document).on("pageInit", function(e) {
 	
 	if (page.name === 'fromsudan') {
 		console.log('from sudan page');
-		myApp.rtl = false;
 		var divText="";
 		//run Ajax script here
 		$.ajax({
@@ -298,6 +276,45 @@ $$(document).on("pageInit", function(e) {
 					message: errormsg
 				});
 			}
+		});
+		// search
+		$(".searchlistings").keyup(function(){
+			delay(function(){
+				count = $(".searchlistings").val().length;
+				divText="";
+				searchterm = $(".searchlistings").val();
+				$.ajax({
+					beforeSend: function() { myApp.showIndicator(); },
+					complete: function(){ myApp.hideIndicator(); },
+					url: "http://www.webhosting.sd/~tahweel/php/search.php?type=1&searchterm="+searchterm,
+					dataType: "jsonp",
+					jsonpCallback: "jsonCallback",
+					success:function jsonCallback(data){
+						console.log(data);
+						$.each(data, function(i, field){
+							divText += '<li><div class="item-content">';
+							divText += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green font-green">I want to give:</div>';
+							divText += '<div class="item-title-row">';
+							divText += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							divText += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							divText += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							divText += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							divText += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							divText += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							divText += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						});
+						$('#divTextArea').html(divText);
+						if (data=="") {
+							if (count>0) {
+								$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> Your search returned no results.</p></div>');
+							} else {
+								$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+							}
+						}
+					},
+				});
+			}, 1000 );
 		});
 	}
 	
@@ -337,6 +354,45 @@ $$(document).on("pageInit", function(e) {
 				});
 			}
 		});
+		// search
+		$(".searchlistings").keyup(function(){
+			delay(function(){
+				count = $(".searchlistings").val().length;
+				divText="";
+				searchterm = $(".searchlistings").val();
+				$.ajax({
+					beforeSend: function() { myApp.showIndicator(); },
+					complete: function(){ myApp.hideIndicator(); },
+					url: "http://www.webhosting.sd/~tahweel/php/search.php?type=2&searchterm="+searchterm,
+					dataType: "jsonp",
+					jsonpCallback: "jsonCallback",
+					success:function jsonCallback(data){
+						console.log(data);
+						$.each(data, function(i, field){
+							divText += '<li><div class="item-content">';
+							divText += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green font-green">I want to give:</div>';
+							divText += '<div class="item-title-row">';
+							divText += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							divText += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							divText += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							divText += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							divText += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							divText += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							divText += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						});
+						$('#divTextArea').html(divText);
+						if (data=="") {
+							if (count>0) {
+								$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> Your search returned no results.</p></div>');
+							} else {
+								$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+							}
+						}
+					},
+				});
+			}, 1000 );
+		});
 	}
 	
 	if (page.name === 'domestic') {
@@ -372,6 +428,42 @@ $$(document).on("pageInit", function(e) {
 					message: errormsg
 				});
 			}
+		});
+		// search
+		$(".searchlistings").keyup(function(){
+			delay(function(){
+				count = $(".searchlistings").val().length;
+				divText="";
+				searchterm = $(".searchlistings").val();
+				$.ajax({
+					beforeSend: function() { myApp.showIndicator(); },
+					complete: function(){ myApp.hideIndicator(); },
+					url: "http://www.webhosting.sd/~tahweel/php/search.php?type=3&searchterm="+searchterm,
+					dataType: "jsonp",
+					jsonpCallback: "jsonCallback",
+					success:function jsonCallback(data){
+						console.log(data);
+						$.each(data, function(i, field){
+							divText += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+							divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+							divText += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+							divText += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+							divText += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+							divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+							divText += '<a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						});
+						$('#divTextArea').html(divText);
+						if (data=="") {
+							if (count>0) {
+								$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> Your search returned no results.</p></div>');
+							} else {
+								$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+							}
+						}
+					},
+				});
+			}, 1000 );
 		});
 	}
 	
@@ -410,6 +502,44 @@ $$(document).on("pageInit", function(e) {
 					message: errormsg
 				});
 			}
+		});
+		// search
+		$(".searchlistings").keyup(function(){
+			delay(function(){
+				count = $(".searchlistings").val().length;
+				divText="";
+				searchterm = $(".searchlistings").val();
+				$.ajax({
+					beforeSend: function() { myApp.showIndicator(); },
+					complete: function(){ myApp.hideIndicator(); },
+					url: "http://www.webhosting.sd/~tahweel/php/search.php?type=4&searchterm="+searchterm,
+					dataType: "jsonp",
+					jsonpCallback: "jsonCallback",
+					success:function jsonCallback(data){
+						console.log(data);
+						$.each(data, function(i, field){
+							divText += '<li><div class="item-content">';
+							divText += '<div class="item-media"><img src="img/exchange-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
+							divText += '<div class="item-title-row">';
+							divText += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							divText += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							divText += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							divText += '</div><div class="item-subtitle"><i class="fa fa-chevron-right"></i> ' + data[i].from_city + '</div>';
+							divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							divText += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+						});
+						$('#divTextArea').html(divText);
+						if (data=="") {
+							if (count>0) {
+								$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> Your search returned no results.</p></div>');
+							} else {
+								$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+							}
+						}
+					},
+				});
+			}, 1000 );
 		});
 	}
 	
@@ -454,7 +584,7 @@ $$(document).on("pageInit", function(e) {
 					}); 
 					if (data[i].type==4) {
 						divText += '<li class="col-100"><img src="img/exchange-icon.png" alt=""></li>';
-						divText += '<li class="detailscolor">#125</li>';
+						divText += '<li class="detailscolor">#' + data[i].id + '</li>';
 						divText += '<li class="font-green">I want to give:</li>';
 						divText += '<li class="font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</li>';
 						divText += '<li>&nbsp</li>';
@@ -475,7 +605,7 @@ $$(document).on("pageInit", function(e) {
 						}
 					
 						divText += '<li class="col-100"><img src="img/' + showimg + '" alt=""></li>';
-						divText += '<li class="detailscolor">#125</li>';
+						divText += '<li class="detailscolor">#' + data[i].id + '</li>';
 						divText += '<li class="font-green">I want to give:</li>';
 						divText += '<li class="font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</li>';
 						divText += '<li class="font-green">' + data[i].from_city + ', ' + data[i].from_country + '</li>';
