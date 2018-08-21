@@ -551,6 +551,8 @@ $$(document).on("pageInit", function(e) {
 		var getid = page.query.listingid;
 		//console.log(getid);
 		console.log(getid);
+		$('#cont1').hide();
+		$('#cont2').hide();
 		
 		var divText="";
 		//run Ajax script here
@@ -565,7 +567,6 @@ $$(document).on("pageInit", function(e) {
 					$$("#savelink").on("click", function(){
 						var savedtoken = localStorage.getItem("token");
 						var dataString = 'savedtoken=' + savedtoken + '&listingid=' + getid;
-						// get user id
 						$.ajax({
 							beforeSend: function() { myApp.showIndicator(); },
 							complete: function(){ myApp.hideIndicator(); },
@@ -573,15 +574,18 @@ $$(document).on("pageInit", function(e) {
 							url: "http://www.webhosting.sd/~tahweel/php/save.php",
 							data: dataString, // send token to grab data
 							success: function jsonCallback(data){
+								if (data=="11") {
+									msg="Listing removed from saved list!";
+								} else if (data=="18") {
+									msg="Listing saved!";
+								}
 								myApp.addNotification({
-									message: "Listing saved!"
+									message: msg
 								});
 							},
 							error:function(XMLHttpRequest,textStatus,errorThrown){
 								var errormsg=XMLHttpRequest.responseText;
-								if (errormsg=="11") {
-									errormsg="This listing is in the saved list!";
-								} else if (errormsg=="12") {
+								if (errormsg=="12") {
 									errormsg="Save failed!";
 								}
 								myApp.addNotification({
@@ -589,7 +593,33 @@ $$(document).on("pageInit", function(e) {
 								});
 							}
 						});
-					}); 
+					});
+					$$("#dellisting").on("click", function(){
+						myApp.confirm('Delete this listing?', function () {
+							var savedtoken = localStorage.getItem("token");
+							var dataString = 'savedtoken=' + savedtoken + '&listingid=' + getid;
+							$.ajax({
+								beforeSend: function() { myApp.showIndicator(); },
+								complete: function(){ myApp.hideIndicator(); },
+								type: "GET",
+								url: "http://www.webhosting.sd/~tahweel/php/dellisting.php",
+								data: dataString, // send token to grab data
+								success: function jsonCallback(data){
+									myApp.addNotification({
+										message: "Listing deleted!"
+									});
+									mainView.loadPage('index.html');
+								},
+							});
+						});
+					});
+					// show save or delete
+					if (data[i].userid==localStorage.getItem("id")) {
+						$('#cont2').show();
+					} else {
+						$('#cont1').show();
+					}
+					
 					if (data[i].type==4) {
 						divText += '<li class="col-100"><img src="img/exchange-icon.png" alt=""></li>';
 						divText += '<li class="detailscolor">#' + data[i].id + '</li>';
@@ -749,6 +779,16 @@ $$(document).on("pageInit", function(e) {
 		
 		var activeListings="";
 		var expiredListings="";
+		
+		//get nameofuser
+		$.ajax({
+			type: "GET",
+			url: "http://www.webhosting.sd/~tahweel/php/getnameofuser.php?getid="+getid,
+			success: function(data) {
+			   $('#nameofuser').text(data);
+			},
+		});
+		
 		//run Ajax script here
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
@@ -758,7 +798,6 @@ $$(document).on("pageInit", function(e) {
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
 				$.each(data, function(i, field){
-					$('#nameofuser').text(data[i].nameofuser);
 
 					if (data[i].expired==0) {
 						if (data[i].type==1) { //fromsudan
