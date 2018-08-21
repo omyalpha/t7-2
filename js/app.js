@@ -135,6 +135,15 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="2") {
+					errormsg="All fields are required!";
+				} else if (errormsg=="4") {
+					errormsg="Username taken!";
+				} else if (errormsg=="5") {
+					errormsg="Email is already registered!";
+				} else if (errormsg=="6") {
+					errormsg="Invalid email!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -169,6 +178,9 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="3") {
+					errormsg="Wrong login!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -191,6 +203,9 @@ $$(document).on("pageInit", function(e) {
 			url: "http://www.webhosting.sd/~tahweel/php/resetpass.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
+				if (data=="13") {
+					errormsg="Your new password is sent. Please check your email!";
+				}
 				myApp.addNotification({
 					message: data
 				});
@@ -199,6 +214,9 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="9") {
+					errormsg="Wrong email!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -232,6 +250,15 @@ $$(document).on("pageInit", function(e) {
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
+				if (errormsg=="2") {
+					errormsg="All fields are required!";
+				} else if (errormsg=="4") {
+					errormsg="Username taken!";
+				} else if (errormsg=="5") {
+					errormsg="Email is already registered!";
+				} else if (errormsg=="6") {
+					errormsg="Invalid email!";
+				}
 				var errormsg=XMLHttpRequest.responseText;
 				myApp.addNotification({
 					message: errormsg
@@ -270,12 +297,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 		// search
 		$(".searchlistings").keyup(function(){
@@ -347,12 +368,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 		// search
 		$(".searchlistings").keyup(function(){
@@ -422,12 +437,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 		// search
 		$(".searchlistings").keyup(function(){
@@ -496,12 +505,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 		// search
 		$(".searchlistings").keyup(function(){
@@ -576,6 +579,11 @@ $$(document).on("pageInit", function(e) {
 							},
 							error:function(XMLHttpRequest,textStatus,errorThrown){
 								var errormsg=XMLHttpRequest.responseText;
+								if (errormsg=="11") {
+									errormsg="This listing is in the saved list!";
+								} else if (errormsg=="12") {
+									errormsg="Save failed!";
+								}
 								myApp.addNotification({
 									message: errormsg
 								});
@@ -625,12 +633,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divText').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> This listing may be deleted or expired!</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 	}
 	
@@ -721,6 +723,13 @@ $$(document).on("pageInit", function(e) {
 				},
 				error:function(XMLHttpRequest,textStatus,errorThrown){
 					var errormsg=XMLHttpRequest.responseText;
+					if (errormsg=="1") {
+						errormsg="Wrong token!";
+					} else if (errormsg=="2") {
+						errormsg="All fields are required!";
+					} else if (errormsg=="10") {
+						errormsg="You have reached your maximum of three active listings!";
+					}
 					myApp.addNotification({
 						message: errormsg
 					});
@@ -856,6 +865,9 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="8") {
+					errormsg="No ID!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -983,6 +995,11 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="1") {
+					errormsg="Wrong token!";
+				} else if (errormsg=="7") {
+					errormsg="Missing token!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -1023,6 +1040,9 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="1") {
+					errormsg="Wrong token!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});

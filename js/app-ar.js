@@ -121,7 +121,7 @@ $$(document).on("pageInit", function(e) {
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 			   myApp.addNotification({
-					message: "Account created"
+					message: "تم إنشاء الحساب"
 			   });
 			   localStorage.setItem("token",data);
 			   $('#loginli').hide();
@@ -135,6 +135,15 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="2") {
+					errormsg="كل البيانات مطلوبة!";
+				} else if (errormsg=="4") {
+					errormsg="إسم المستخدم غير متاح!";
+				} else if (errormsg=="5") {
+					errormsg="البريد الإلكتروني غير متاح!";
+				} else if (errormsg=="6") {
+					errormsg="صيغة البريد الإلكتروني غير صحيحة!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -169,6 +178,9 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="3") {
+					errormsg="بيانات الدخول غير صحيحة!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -191,6 +203,9 @@ $$(document).on("pageInit", function(e) {
 			url: "http://www.webhosting.sd/~tahweel/php/resetpass.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
+				if (data=="13") {
+					errormsg="تم إرسال كلمة السر الجديدة. الرجاء مراجعة بريدك الإلكتروني!";
+				}
 				myApp.addNotification({
 					message: data
 				});
@@ -199,6 +214,9 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="9") {
+					errormsg="البريد الإلكتروني غير صحيح!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -227,12 +245,21 @@ $$(document).on("pageInit", function(e) {
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 			   myApp.addNotification({
-					message: "Account updated"
+					message: "تم تحديث البيانات"
 			   });
 			   mainView.loadPage('indexar.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="2") {
+					errormsg="كل البيانات مطلوبة!";
+				} else if (errormsg=="4") {
+					errormsg="إسم المستخدم غير متاح!";
+				} else if (errormsg=="5") {
+					errormsg="البريد الإلكتروني غير متاح!";
+				} else if (errormsg=="6") {
+					errormsg="صيغة البريد الإلكتروني غير صحيحة!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -271,12 +298,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> لا توجد إعلانات نشطة في هذا القسم</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 		// search
 		$(".searchlistings").keyup(function(){
@@ -348,12 +369,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> لا توجد إعلانات نشطة في هذا القسم.</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 		// search
 		$(".searchlistings").keyup(function(){
@@ -423,12 +438,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> لا توجد إعلانات نشطة في هذا القسم.</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 		// search
 		$(".searchlistings").keyup(function(){
@@ -497,12 +506,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divTextArea').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> لا توجد إعلانات نشطة في هذا القسم.</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 		// search
 		$(".searchlistings").keyup(function(){
@@ -572,11 +575,16 @@ $$(document).on("pageInit", function(e) {
 							data: dataString, // send token to grab data
 							success: function jsonCallback(data){
 								myApp.addNotification({
-									message: "Listing saved!"
+									message: "تم حفظ الإعلان!"
 								});
 							},
 							error:function(XMLHttpRequest,textStatus,errorThrown){
 								var errormsg=XMLHttpRequest.responseText;
+								if (errormsg=="11") {
+									errormsg="هذا الإعلان محفوظ لديك!";
+								} else if (errormsg=="12") {
+									errormsg="فشل في الحفظ!";
+								}
 								myApp.addNotification({
 									message: errormsg
 								});
@@ -626,12 +634,6 @@ $$(document).on("pageInit", function(e) {
 					$('#divText').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> هذا الإعلان قد يكون منتهي أو تم حذفه!</p></div>');
 				}
 			},
-			error:function(XMLHttpRequest,textStatus,errorThrown){
-				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
-			}
 		});
 	}
 	
@@ -716,12 +718,19 @@ $$(document).on("pageInit", function(e) {
 				data: form.serialize(), // serializes the form's elements.
 				success: function(data) {
 				   myApp.addNotification({
-						message: "Listing added successfully"
+						message: "تم إضافة الإعلان"
 				   });
 				   mainView.loadPage('indexar.html');
 				},
 				error:function(XMLHttpRequest,textStatus,errorThrown){
 					var errormsg=XMLHttpRequest.responseText;
+					if (errormsg=="1") {
+						errormsg="حسابك غير محدد!";
+					} else if (errormsg=="2") {
+						errormsg="كل البيانات مطلوبة!";
+					} else if (errormsg=="10") {
+						errormsg="لا يمكنك إضافة أكثر من ثلاثة إعلانات نشطة!";
+					}
 					myApp.addNotification({
 						message: errormsg
 					});
@@ -857,6 +866,9 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="8") {
+					errormsg="فشل في تحديد الحساب!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -984,6 +996,11 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="1") {
+					errormsg="حسابك غير محدد!";
+				} else if (errormsg=="7") {
+					errormsg="حسابك غير محدد!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
@@ -1024,6 +1041,9 @@ $$(document).on("pageInit", function(e) {
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="1") {
+					errormsg="حسابك غير محدد!";
+				}
 				myApp.addNotification({
 					message: errormsg
 				});
