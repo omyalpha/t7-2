@@ -54,5 +54,5 @@
 	
 	<preference name="SplashScreenDelay" value="5000" />
 	<preference name="orientation" value="portrait" />
-	<preference name="show-splash-screen-spinner" value="false" /> 
+	<preference name="ShowSplashScreenSpinner" value="false"/> 
 </widget>
