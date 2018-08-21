@@ -204,10 +204,10 @@ $$(document).on("pageInit", function(e) {
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 				if (data=="13") {
-					errormsg="تم إرسال كلمة السر الجديدة. الرجاء مراجعة بريدك الإلكتروني!";
+					msg="تم إرسال كلمة السر الجديدة. الرجاء مراجعة بريدك الإلكتروني!";
 				}
 				myApp.addNotification({
-					message: data
+					message: msg
 				});
 				//alert(data); // show response from the php script.
 				mainView.loadPage('indexar.html');

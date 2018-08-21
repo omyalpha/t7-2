@@ -204,10 +204,10 @@ $$(document).on("pageInit", function(e) {
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 				if (data=="13") {
-					errormsg="Your new password is sent. Please check your email!";
+					msg="Your new password is sent. Please check your email!";
 				}
 				myApp.addNotification({
-					message: data
+					message: msg
 				});
 				//alert(data); // show response from the php script.
 				mainView.loadPage('index.html');
