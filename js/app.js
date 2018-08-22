@@ -917,8 +917,8 @@ $$(document).on("pageInit", function(e) {
 	if (page.name === 'savedlistings') {
 		console.log('saved listings page');
 		
-		var activeListings="";
-		var expiredListings="";
+		var savedactiveListings="";
+		var savedexpiredListings="";
 		//run Ajax script here
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
@@ -931,106 +931,107 @@ $$(document).on("pageInit", function(e) {
 
 					if (data[i].expired==0) {
 						if (data[i].type==1) { //fromsudan
-							activeListings += '<li><div class="item-content">';
-							activeListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
-							activeListings += '<div class="item-title-row">';
-							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
-							activeListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
-							activeListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
-							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
-							activeListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
-							activeListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
-							activeListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+							savedactiveListings += '<li><div class="item-content">';
+							savedactiveListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
+							savedactiveListings += '<div class="item-title-row">';
+							savedactiveListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							savedactiveListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							savedactiveListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							savedactiveListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							savedactiveListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							savedactiveListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							savedactiveListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							savedactiveListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 						} else if (data[i].type==2) { // tosudan
-							activeListings += '<li><div class="item-content">';
-							activeListings += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
-							activeListings += '<div class="item-title-row">';
-							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
-							activeListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
-							activeListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
-							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
-							activeListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
-							activeListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
-							activeListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+							savedactiveListings += '<li><div class="item-content">';
+							savedactiveListings += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
+							savedactiveListings += '<div class="item-title-row">';
+							savedactiveListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							savedactiveListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							savedactiveListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							savedactiveListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							savedactiveListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							savedactiveListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							savedactiveListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							savedactiveListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 						} else if (data[i].type==3) { // domestic
-							activeListings += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
-							activeListings += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
-							activeListings += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
-							activeListings += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
-							activeListings += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
-							activeListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
-							activeListings += '<a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+							savedactiveListings += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+							savedactiveListings += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+							savedactiveListings += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+							savedactiveListings += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+							savedactiveListings += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+							savedactiveListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							savedactiveListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+							savedactiveListings += '<a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 						} else if (data[i].type==4) { // exchange
-							activeListings += '<li><div class="item-content">';
-							activeListings += '<div class="item-media"><img src="img/exchange-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
-							activeListings += '<div class="item-title-row">';
-							activeListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
-							activeListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
-							activeListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
-							activeListings += '</div><div class="item-subtitle"><i class="fa fa-chevron-right"></i> ' + data[i].from_city + '</div>';
-							activeListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-							activeListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
-							activeListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+							savedactiveListings += '<li><div class="item-content">';
+							savedactiveListings += '<div class="item-media"><img src="img/exchange-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
+							savedactiveListings += '<div class="item-title-row">';
+							savedactiveListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							savedactiveListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							savedactiveListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							savedactiveListings += '</div><div class="item-subtitle"><i class="fa fa-chevron-right"></i> ' + data[i].from_city + '</div>';
+							savedactiveListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							savedactiveListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							savedactiveListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 						}
 					} else if (data[i].expired==1) {
 						if (data[i].type==1) { //fromsudan
-							expiredListings += '<li><div class="item-content">';
-							expiredListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
-							expiredListings += '<div class="item-title-row">';
-							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
-							expiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
-							expiredListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
-							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
-							expiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
-							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
-							expiredListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+							savedexpiredListings += '<li><div class="item-content">';
+							savedexpiredListings += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
+							savedexpiredListings += '<div class="item-title-row">';
+							savedexpiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							savedexpiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							savedexpiredListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							savedexpiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							savedexpiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							savedexpiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							savedexpiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							savedexpiredListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 						} else if (data[i].type==2) { // tosudan
-							expiredListings += '<li><div class="item-content">';
-							expiredListings += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
-							expiredListings += '<div class="item-title-row">';
-							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
-							expiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
-							expiredListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
-							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
-							expiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
-							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
-							expiredListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+							savedexpiredListings += '<li><div class="item-content">';
+							savedexpiredListings += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
+							savedexpiredListings += '<div class="item-title-row">';
+							savedexpiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							savedexpiredListings += '<div class="item-after font-green">' + data[i].from_city + ', ' + data[i].from_country + '</div>';
+							savedexpiredListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							savedexpiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							savedexpiredListings += '<div class="item-after font-red">' + data[i].to_city + ', ' + data[i].to_country + '</div>';
+							savedexpiredListings += '</div><div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							savedexpiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							savedexpiredListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 						} else if (data[i].type==3) { // domestic
-							expiredListings += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
-							expiredListings += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
-							expiredListings += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
-							expiredListings += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
-							expiredListings += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
-							expiredListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
-							expiredListings += '<a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+							savedexpiredListings += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
+							savedexpiredListings += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
+							savedexpiredListings += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+							savedexpiredListings += '<div class="font-green">From: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+							savedexpiredListings += '<div class="font-red">To: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+							savedexpiredListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							savedexpiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+							savedexpiredListings += '<a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 						} else if (data[i].type==4) { // exchange
-							expiredListings += '<li><div class="item-content">';
-							expiredListings += '<div class="item-media"><img src="img/exchange-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
-							expiredListings += '<div class="item-title-row">';
-							expiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
-							expiredListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
-							expiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
-							expiredListings += '</div><div class="item-subtitle"><i class="fa fa-chevron-right"></i> ' + data[i].from_city + '</div>';
-							expiredListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-							expiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
-							expiredListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
+							savedexpiredListings += '<li><div class="item-content">';
+							savedexpiredListings += '<div class="item-media"><img src="img/exchange-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
+							savedexpiredListings += '<div class="item-title-row">';
+							savedexpiredListings += '<div class="item-title font-green">' + data[i].from_currency + ' ' + data[i].from_amount + '</div>';
+							savedexpiredListings += '</div><div class="item-subtitle font-red">And receive:</div><div class="item-title-row">';
+							savedexpiredListings += '<div class="item-title font-red">' + data[i].to_currency + ' ' + data[i].to_amount + '</div>';
+							savedexpiredListings += '</div><div class="item-subtitle"><i class="fa fa-chevron-right"></i> ' + data[i].from_city + '</div>';
+							savedexpiredListings += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							savedexpiredListings += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div>';
+							savedexpiredListings += '</div><a class="button button-link readmore" href="en/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> View Details</a></li>';
 						}
 					}
 				});
-				$('#activeListings').html(activeListings);
-				$('#expiredListings').html(expiredListings);
-				if (activeListings=="") {
-					$('#activeListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				$('#activeListings').html(savedactiveListings);
+				$('#expiredListings').html(savedexpiredListings);
+				if (savedactiveListings=="") {
+					$('#savedactiveListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
 				}
-				if (expiredListings=="") {
-					$('#expiredListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+				if (savedexpiredListings=="") {
+					$('#savedexpiredListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
 				}
+				console.log(activeListings+'22222');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
