@@ -12,7 +12,9 @@ var $$ = Dom7;
 // Add main view
 var mainView = myApp.addView('.view-main', {
 });
-
+// Appodeal
+var appKey = "eb5c6376d17bca8c6eb773dfe08771616a1c6a468920aa98";
+Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.BANNER);
 
 // Show/hide preloader for remote ajax loaded pages
 // Probably should be removed on a production/local app
@@ -1049,6 +1051,9 @@ $$(document).on("pageInit", function(e) {
 	}
 
 }), $(document).ready(function() {
+	//appodeal
+	Appodeal.show(Appodeal.INTERSTITIAL);
+	
 	$$(".logout").on('click', function(e){
 		localStorage.clear();
 		$('#loginli').show();
