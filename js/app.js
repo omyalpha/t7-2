@@ -52,6 +52,15 @@ $$('.panel-left, .panel-right').on('close', function () {
 });
 
 $$(document).on("pageInit", function(e) {
+	var adcounter=localStorage.getItem("adcounter");
+	adcounter=adcounter+1;
+	if (adcounter % 10 === 0) { // show the interstitial ad every 10 page views
+		adincube.interstitial.isReady(function() {
+			adincube.interstitial.show();
+		});
+	}
+	localStorage.setItem("adcounter",adcounter); // set new value
+	
 	if (localStorage.getItem("token") !== null) {
 		var savedtoken = localStorage.getItem("token");
 		var dataString = 'savedtoken=' + savedtoken;
@@ -1050,7 +1059,7 @@ $$(document).on("pageInit", function(e) {
 
 }), $(document).ready(function() {
 	$$(".logout").on('click', function(e){
-		localStorage.clear();
+		localStorage.removeItem("token");
 		$('#loginli').show();
 		$('#logoutli').hide();
 		$('#settingsli').hide();
@@ -1106,16 +1115,4 @@ $$(document).on("pageInit", function(e) {
 		$('.speed-dial').hide();
 		$('.myname').text("");
 	}
-});
-$$(document).on('deviceready', function(){
-	// adincube ads
-	alert("something");
-	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
-	adincube.interstitial.init(); // cache ad
-	adincube.interstitial.isReady(function() {
-		alert("im in");
-	}, function() {
-		alert("im out");
-	});
-	adincube.interstitial.show();
 });

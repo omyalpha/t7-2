@@ -7,7 +7,7 @@
     <author email="info@tahweelapp.com" href="http://phonegap.com">
         OD13
     </author>
-    <content src="index.html" /> 
+    <content src="indexar.html" /> 
 	<icon src="icon.png" />
 	<access origin='*' 
 	  allows-arbitrary-loads-in-media='true' 
