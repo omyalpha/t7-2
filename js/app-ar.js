@@ -105,9 +105,6 @@ $$(document).on("pageInit", function(e) {
 	  };
 	})();
 		
-	if (page.name === 'home') {
-		adincube.interstitial.show();
-	}
 	if (page.name === 'signup') {
 		console.log('signup page');
 		
@@ -1052,8 +1049,15 @@ $$(document).on("pageInit", function(e) {
 
 }), $(document).ready(function() {
 	// adincube ads
+	alert("something");
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
 	adincube.interstitial.init(); // cache ad
+	adincube.interstitial.isReady(function() {
+		alert("im in");
+	}, function() {
+		alert("im out");
+	});
+	adincube.interstitial.show();
 	
 	$$(".logout").on('click', function(e){
 		localStorage.clear();
