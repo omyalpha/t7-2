@@ -4,6 +4,7 @@ var myApp = new Framework7({
     // Enable Material theme
     material: true,
 	notificationHold: 10000,
+	cache: false
 });
 
 // Expose Internal DOM library
@@ -1106,3 +1107,15 @@ $$(document).on("pageInit", function(e) {
 		$('.myname').text("");
 	}
 });
+function onDeviceReady() {
+	// adincube ads
+	alert("something");
+	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
+	adincube.interstitial.init(); // cache ad
+	adincube.interstitial.isReady(function() {
+		alert("im in");
+	}, function() {
+		alert("im out");
+	});
+	adincube.interstitial.show();
+}
