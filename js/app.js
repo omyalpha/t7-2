@@ -1107,7 +1107,7 @@ $$(document).on("pageInit", function(e) {
 		$('.myname').text("");
 	}
 });
-function onDeviceReady() {
+$$(document).on('deviceready', function(){
 	// adincube ads
 	alert("something");
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
@@ -1118,4 +1118,4 @@ function onDeviceReady() {
 		alert("im out");
 	});
 	adincube.interstitial.show();
-}
+});
