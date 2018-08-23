@@ -9,7 +9,10 @@
     </author>
     <content src="indexar.html" /> 
 	<icon src="icon.png" />
-	<access origin="*" />
+	<access origin='*' 
+	  allows-arbitrary-loads-in-media='true' 
+	  allows-arbitrary-loads-in-web-content='true'
+	  allows-local-networking='true' />
 	<allow-intent href="*" />
 	<allow-navigation href="*" />
 	
@@ -28,7 +31,6 @@
 	  <param name="wp-package" value="SocialSharing"/>
 	</feature>
 
-	<plugin name="cordova-plugin-ad-appodeal" source="npm" />
 	<plugin name="cordova-plugin-x-socialsharing" source="npm" />
 	<plugin name="cordova-plugin-whitelist" source="npm" />
 	<plugin name="cordova-plugin-splashscreen" source="npm" />
@@ -56,4 +58,6 @@
 	<preference name="SplashScreenDelay" value="5000" />
 	<preference name="orientation" value="portrait" />
 	<preference name="ShowSplashScreenSpinner" value="false"/> 
+	<preference name="android-build-tool" value="gradle" />
+	<plugin name="cordova-plugin-adincube" />
 </widget>
