@@ -104,10 +104,7 @@ $$(document).on("pageInit", function(e) {
 		timer = setTimeout(callback, ms);
 	  };
 	})();
-	
-	// adincube ads
-	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
-	adincube.interstitial.init(); // cache ad
+		
 	if (page.name === 'home') {
 		adincube.interstitial.show();
 	}
@@ -1054,8 +1051,9 @@ $$(document).on("pageInit", function(e) {
 	}
 
 }), $(document).ready(function() {
-	//appodeal
-	Appodeal.show(Appodeal.INTERSTITIAL);
+	// adincube ads
+	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
+	adincube.interstitial.init(); // cache ad
 	
 	$$(".logout").on('click', function(e){
 		localStorage.clear();
