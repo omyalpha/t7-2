@@ -53,13 +53,14 @@ $$('.panel-left, .panel-right').on('close', function () {
 
 $$(document).on("pageInit", function(e) {
 	var adcounter=localStorage.getItem("adcounter");
-	adcounter=adcounter+1;
+	adcounter=Number(adcounter)+1;
 	if (adcounter % 10 === 0) { // show the interstitial ad every 10 page views
 		adincube.interstitial.isReady(function() {
 			adincube.interstitial.show();
 		});
 	}
 	localStorage.setItem("adcounter",adcounter); // set new value
+	console.log(localStorage.getItem("adcounter"));
 	
 	if (localStorage.getItem("token") !== null) {
 		var savedtoken = localStorage.getItem("token");
@@ -130,9 +131,7 @@ $$(document).on("pageInit", function(e) {
 			url: "http://www.webhosting.sd/~tahweel/php/signup.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
-			   myApp.addNotification({
-					message: "Account created"
-			   });
+			   myApp.alert('Account created');
 			   localStorage.setItem("token",data);
 			   $('#loginli').hide();
 			   $('#logoutli').show();
@@ -154,9 +153,7 @@ $$(document).on("pageInit", function(e) {
 				} else if (errormsg=="6") {
 					errormsg="Invalid email!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
        });
@@ -191,9 +188,7 @@ $$(document).on("pageInit", function(e) {
 				if (errormsg=="3") {
 					errormsg="Wrong login!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
        });
@@ -216,9 +211,7 @@ $$(document).on("pageInit", function(e) {
 				if (data=="13") {
 					msg="Your new password is sent. Please check your email!";
 				}
-				myApp.addNotification({
-					message: msg
-				});
+				myApp.alert(msg);
 				//alert(data); // show response from the php script.
 				mainView.loadPage('index.html');
 			},
@@ -227,9 +220,7 @@ $$(document).on("pageInit", function(e) {
 				if (errormsg=="9") {
 					errormsg="Wrong email!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
        });
@@ -254,9 +245,7 @@ $$(document).on("pageInit", function(e) {
 			url: "http://www.webhosting.sd/~tahweel/php/settings.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
-			   myApp.addNotification({
-					message: "Account updated"
-			   });
+			   myApp.alert('Account updated');
 			   mainView.loadPage('index.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -270,9 +259,7 @@ $$(document).on("pageInit", function(e) {
 					errormsg="Invalid email!";
 				}
 				var errormsg=XMLHttpRequest.responseText;
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
        });
@@ -589,18 +576,14 @@ $$(document).on("pageInit", function(e) {
 								} else if (data=="18") {
 									msg="Listing saved!";
 								}
-								myApp.addNotification({
-									message: msg
-								});
+								myApp.alert(msg);
 							},
 							error:function(XMLHttpRequest,textStatus,errorThrown){
 								var errormsg=XMLHttpRequest.responseText;
 								if (errormsg=="12") {
 									errormsg="Save failed!";
 								}
-								myApp.addNotification({
-									message: errormsg
-								});
+								myApp.alert(errormsg);
 							}
 						});
 					});
@@ -615,9 +598,7 @@ $$(document).on("pageInit", function(e) {
 								url: "http://www.webhosting.sd/~tahweel/php/dellisting.php",
 								data: dataString, // send token to grab data
 								success: function jsonCallback(data){
-									myApp.addNotification({
-										message: "Listing deleted!"
-									});
+									myApp.alert('Listing deleted');
 									mainView.loadPage('index.html');
 								},
 							});
@@ -756,9 +737,7 @@ $$(document).on("pageInit", function(e) {
 				url: "http://www.webhosting.sd/~tahweel/php/addlisting.php",
 				data: form.serialize(), // serializes the form's elements.
 				success: function(data) {
-				   myApp.addNotification({
-						message: "Listing added successfully"
-				   });
+				   myApp.alert('Listing added successfully');
 				   mainView.loadPage('index.html');
 				},
 				error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -770,9 +749,7 @@ $$(document).on("pageInit", function(e) {
 					} else if (errormsg=="10") {
 						errormsg="You have reached your maximum of three active listings!";
 					}
-					myApp.addNotification({
-						message: errormsg
-					});
+					myApp.alert(errormsg);
 				}
 			});
 		   });
@@ -917,9 +894,7 @@ $$(document).on("pageInit", function(e) {
 				if (errormsg=="8") {
 					errormsg="No ID!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
 	}
@@ -1050,9 +1025,7 @@ $$(document).on("pageInit", function(e) {
 				} else if (errormsg=="7") {
 					errormsg="Missing token!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
 	}
@@ -1093,9 +1066,7 @@ $$(document).on("pageInit", function(e) {
 				if (errormsg=="1") {
 					errormsg="Wrong token!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
 		$('#loginli').hide();

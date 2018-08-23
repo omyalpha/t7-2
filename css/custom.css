@@ -12,9 +12,13 @@
 }
 
 .detailsul {
-  list-style: none;
+	list-style: none;
 }
 
 .detailscolor {
-    background-color: #F7F7F7;
+	background-color: #F7F7F7;
+}
+
+.page {
+	padding-bottom: 60px !important;
 }

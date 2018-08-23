@@ -52,13 +52,14 @@ $$('.panel-left, .panel-right').on('close', function () {
 
 $$(document).on("pageInit", function(e) {
 	var adcounter=localStorage.getItem("adcounter");
-	adcounter=adcounter+1;
+	adcounter=Number(adcounter)+1;
 	if (adcounter % 10 === 0) { // show the interstitial ad every 10 page views
 		adincube.interstitial.isReady(function() {
 			adincube.interstitial.show();
 		});
 	}
 	localStorage.setItem("adcounter",adcounter); // set new value
+	console.log(localStorage.getItem("adcounter"));
 	
 	if (localStorage.getItem("token") !== null) {
 		var savedtoken = localStorage.getItem("token");
@@ -82,7 +83,8 @@ $$(document).on("pageInit", function(e) {
 			   $('.myname').html(obj[0].name);
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
-				alert(XMLHttpRequest.responseText);
+				errormsg=alert(XMLHttpRequest.responseText);
+				myApp.alert(errormsg);
 			}
 		});
 		$('#loginli').hide();
@@ -129,9 +131,6 @@ $$(document).on("pageInit", function(e) {
 			url: "http://www.webhosting.sd/~tahweel/php/signup.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
-			   myApp.addNotification({
-					message: "تم إنشاء الحساب"
-			   });
 			   localStorage.setItem("token",data);
 			   $('#loginli').hide();
 			   $('#logoutli').show();
@@ -140,6 +139,7 @@ $$(document).on("pageInit", function(e) {
 			   $('#addlisting').show();
 			   $('#savedlistings').show();
 			   $('.speed-dial').show();
+			   myApp.alert('تم إنشاء الحساب');
 			   mainView.loadPage('indexar.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -153,9 +153,7 @@ $$(document).on("pageInit", function(e) {
 				} else if (errormsg=="6") {
 					errormsg="صيغة البريد الإلكتروني غير صحيحة!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
        });
@@ -190,9 +188,7 @@ $$(document).on("pageInit", function(e) {
 				if (errormsg=="3") {
 					errormsg="بيانات الدخول غير صحيحة!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
        });
@@ -215,9 +211,7 @@ $$(document).on("pageInit", function(e) {
 				if (data=="13") {
 					msg="تم إرسال كلمة السر الجديدة. الرجاء مراجعة بريدك الإلكتروني!";
 				}
-				myApp.addNotification({
-					message: msg
-				});
+				myApp.alert(msg);
 				//alert(data); // show response from the php script.
 				mainView.loadPage('indexar.html');
 			},
@@ -226,9 +220,7 @@ $$(document).on("pageInit", function(e) {
 				if (errormsg=="9") {
 					errormsg="البريد الإلكتروني غير صحيح!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
        });
@@ -253,9 +245,7 @@ $$(document).on("pageInit", function(e) {
 			url: "http://www.webhosting.sd/~tahweel/php/settings.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
-			   myApp.addNotification({
-					message: "تم تحديث البيانات"
-			   });
+			   myApp.alert('تم تحديث البيانات');
 			   mainView.loadPage('indexar.html');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -269,9 +259,7 @@ $$(document).on("pageInit", function(e) {
 				} else if (errormsg=="6") {
 					errormsg="صيغة البريد الإلكتروني غير صحيحة!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
        });
@@ -589,18 +577,14 @@ $$(document).on("pageInit", function(e) {
 								} else if (data=="18") {
 									msg="تم حفظ الإعلان!";
 								}
-								myApp.addNotification({
-									message: msg
-								});
+								myApp.alert(msg);
 							},
 							error:function(XMLHttpRequest,textStatus,errorThrown){
 								var errormsg=XMLHttpRequest.responseText;
 								if (errormsg=="12") {
 									errormsg="فشل في الحفظ!";
 								}
-								myApp.addNotification({
-									message: errormsg
-								});
+								myApp.alert(errormsg);
 							}
 						});
 					});
@@ -615,9 +599,7 @@ $$(document).on("pageInit", function(e) {
 								url: "http://www.webhosting.sd/~tahweel/php/dellisting.php",
 								data: dataString, // send token to grab data
 								success: function jsonCallback(data){
-									myApp.addNotification({
-										message: "تم حذف الإعلان!"
-									});
+									myApp.alert('تم حذف الإعلان');
 									mainView.loadPage('index.html');
 								},
 							});
@@ -757,9 +739,7 @@ $$(document).on("pageInit", function(e) {
 				url: "http://www.webhosting.sd/~tahweel/php/addlisting.php",
 				data: form.serialize(), // serializes the form's elements.
 				success: function(data) {
-				   myApp.addNotification({
-						message: "تم إضافة الإعلان"
-				   });
+				   myApp.alert('تم إضافة الإعلان');
 				   mainView.loadPage('indexar.html');
 				},
 				error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -771,9 +751,7 @@ $$(document).on("pageInit", function(e) {
 					} else if (errormsg=="10") {
 						errormsg="لا يمكنك إضافة أكثر من ثلاثة إعلانات نشطة!";
 					}
-					myApp.addNotification({
-						message: errormsg
-					});
+					myApp.alert(errormsg);
 				}
 			});
 		   });
@@ -918,9 +896,7 @@ $$(document).on("pageInit", function(e) {
 				if (errormsg=="8") {
 					errormsg="فشل في تحديد الحساب!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
 	}
@@ -1050,9 +1026,7 @@ $$(document).on("pageInit", function(e) {
 				} else if (errormsg=="7") {
 					errormsg="حسابك غير محدد!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
 	}
@@ -1093,9 +1067,7 @@ $$(document).on("pageInit", function(e) {
 				if (errormsg=="1") {
 					errormsg="حسابك غير محدد!";
 				}
-				myApp.addNotification({
-					message: errormsg
-				});
+				myApp.alert(errormsg);
 			}
 		});
 		$('#loginli').hide();
@@ -1120,6 +1092,7 @@ $$(document).on('deviceready', function(){
 	// adincube ads
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
 	adincube.interstitial.init(); // cache ad
+	adincube.banner.load(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM); // preload banner
 	adincube.banner.show(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM);
 	localStorage.setItem("adcounter","0"); // ads counter
 });
