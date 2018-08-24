@@ -57,6 +57,8 @@ $$(document).on("pageInit", function(e) {
 		adincube.interstitial.isReady(function() {
 			adincube.interstitial.show();
 		});
+	} else {
+		adincube.banner.show(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM);
 	}
 	localStorage.setItem("adcounter",adcounter); // set new value
 	console.log(localStorage.getItem("adcounter"));
@@ -1093,6 +1095,5 @@ $$(document).on('deviceready', function(){
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
 	adincube.interstitial.init(); // cache ad
 	adincube.banner.load(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM); // preload banner
-	adincube.banner.show(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM);
 	localStorage.setItem("adcounter","0"); // ads counter
 });
