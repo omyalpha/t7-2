@@ -58,6 +58,8 @@ $$(document).on("pageInit", function(e) {
 		adincube.interstitial.isReady(function() {
 			adincube.interstitial.show();
 		});
+	} else {
+		adincube.banner.show(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM);
 	}
 	localStorage.setItem("adcounter",adcounter); // set new value
 	console.log(localStorage.getItem("adcounter"));
