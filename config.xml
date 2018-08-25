@@ -7,12 +7,9 @@
     <author email="info@tahweelapp.com" href="http://phonegap.com">
         OD13
     </author>
-    <content src="indexar.html" /> 
+    <content src="main.html" /> 
 	<icon src="icon.png" />
-	<access origin='*' 
-	  allows-arbitrary-loads-in-media='true' 
-	  allows-arbitrary-loads-in-web-content='true'
-	  allows-local-networking='true' />
+	<access origin='*'/>
 	<allow-intent href="*" />
 	<allow-navigation href="*" />
 	
@@ -35,6 +32,8 @@
 	<plugin name="cordova-plugin-whitelist" source="npm" />
 	<plugin name="cordova-plugin-splashscreen" source="npm" />
 	<plugin name="cordova-plugin-adincube" source="npm" />
+	<plugin name="phonegap-admob" source="npm"/>
+	
 	<splash src="splash.png" />
 	<splash platform="android" qualifier="port-ldpi" src="img/splash/andoid/port-ldpi.png" />
 	<splash platform="android" qualifier="port-mdpi" src="img/splash/android/port-mdpi.png" />
@@ -59,5 +58,4 @@
 	<preference name="SplashScreenDelay" value="5000" />
 	<preference name="orientation" value="portrait" />
 	<preference name="ShowSplashScreenSpinner" value="false"/>
-	<preference name="android-build-tool" value="gradle" />
 </widget>

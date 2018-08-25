@@ -1101,13 +1101,20 @@ $$(document).on("pageInit", function(e) {
 	}
 });
 $$(document).on('deviceready', function(){
-	// adincube ads
+    // Set AdMobAds options:
+    admob.setOptions({
+        publisherId:          "pub-1307086053466197",  // Required
+        interstitialAdId:     "ca-app-pub-1307086053466197/8087372576",  // Optional
+    });
+	admob.createBannerView();
+
+	/*/ adincube ads
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
 	adincube.interstitial.init(); // cache ad
 	adincube.banner.load(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM); // preload banner
 	adincube.banner.show(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM);
 	localStorage.setItem("adcounter","0"); // ads counter
-	
+	*/
 	// check if language is set
 	if (localStorage.getItem("language")==1) { // arabic
 		// redirect to indexar.html
