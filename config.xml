@@ -9,7 +9,7 @@
     </author>
     <content src="main.html" /> 
 	<icon src="icon.png" />
-	<access origin='*'/>
+	<access origin='*' />
 	<allow-intent href="*" />
 	<allow-navigation href="*" />
 	
@@ -31,7 +31,6 @@
 	<plugin name="cordova-plugin-x-socialsharing" source="npm" />
 	<plugin name="cordova-plugin-whitelist" source="npm" />
 	<plugin name="cordova-plugin-splashscreen" source="npm" />
-	<plugin name="cordova-plugin-adincube" source="npm" />
 	<plugin name="phonegap-admob" source="npm"/>
 	
 	<splash src="splash.png" />
