@@ -1133,10 +1133,11 @@ $$(document).on('deviceready', function(){
     admob.setOptions({
         publisherId:          "pub-1307086053466197",  // Required
         interstitialAdId:     "ca-app-pub-1307086053466197/8087372576",  // Optional
+		overlap:              true,
+		isTesting:            true,
+		autoShowInterstitial: true
     });
-	admob.createBannerView({
-		publisherId:          "pub-1307086053466197"
-	});
+	admob.createBannerView();
 
 	/*/ adincube ads
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
@@ -1157,10 +1158,6 @@ $$(document).on('deviceready', function(){
 		}
 	}
 	
-	admob.requestInterstitialAd({
-	  publisherId:          "pub-1307086053466197",
-	  interstitialAdId:     "ca-app-pub-1307086053466197/8087372576",
-	  autoShowInterstitial: true
-	});
+	admob.requestInterstitialAd();
 
 });
