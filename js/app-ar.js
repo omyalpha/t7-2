@@ -1109,11 +1109,12 @@ $$(document).on('deviceready', function(){
 	admobParam.isTesting=true;
 	
 	//admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_CENTER,admobParam);
-	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_APP);
+	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_APP,admobParam);
    
 	// prepare interstitial
 	document.addEventListener(admob.Event.onInterstitialReceive, onInterstitialReceive, false);//show in ad receive event fun need add receive listener
 	admob.cacheInterstitial();// load admob Interstitial
+	admob.showInterstitial();
 
 	/*/ adincube ads
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
