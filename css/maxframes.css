@@ -131,7 +131,7 @@ hr{ clear: both; border: 0; border-top: 1px solid #eeeeee; width: 100%;}
 /*--------------------------------------------*/
 .landingpage{background: #000000; overflow: hidden}
 .landingpage .bgimg{position: absolute;z-index: 0;min-width: 100%;width: auto;min-height: 100%;top: 0;left: 0;opacity: 0.5;}
-.buttonbar{bottom: 0;width: 100%;left: 0;z-index: 99; position: fixed }
+.buttonbar{vertical-align: middle;width: 100%;left: 0;z-index: 99; position: fixed }
 .buttonbar .button, .bigbtn{left: 0; line-height: 60px; padding: 0; vertical-align: middle; text-align: center; height: 60px; border-radius: 0}
 .logo { margin: 0 auto; width: 80%; max-width: 400px; display: block; }
 .logo img{ max-width: 100%;}
