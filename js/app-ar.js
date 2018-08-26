@@ -1107,6 +1107,9 @@ $$(document).on('deviceready', function(){
    
 	var admobParam=new  admob.Params();
 	admobParam.isTesting=true;
+	
+	//admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_CENTER,admobParam);
+	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_APP);
    
 	// prepare interstitial
 	document.addEventListener(admob.Event.onInterstitialReceive, onInterstitialReceive, false);//show in ad receive event fun need add receive listener
