@@ -20,18 +20,11 @@
 }
 
 .bottompadding {
-	padding-bottom: 65px !important;
+	padding-bottom: 0px !important;
 }
 
 .privacypadding {
 	padding: 50px 20px !important;
-}
-
-.mainbg { 
-    background-image: url('../img/bg.png');
-    background-repeat: no-repeat;
-    background-position: center;
-	background-size: cover;
 }
 
 .mainbg { 

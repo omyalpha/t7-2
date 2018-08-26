@@ -55,12 +55,9 @@ $$(document).on("pageInit", function(e) {
 	var adcounter=localStorage.getItem("adcounter");
 	adcounter=Number(adcounter)+1;
 	if (adcounter % 10 === 0) { // show the interstitial ad every 10 page views
-		adincube.interstitial.isReady(function() {
-			adincube.interstitial.show();
-		});
-	} else {
-		adincube.banner.show(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM);
+		showInterstitialAd();
 	}
+	
 	localStorage.setItem("adcounter",adcounter); // set new value
 	console.log(localStorage.getItem("adcounter"));
 	
@@ -1033,6 +1030,39 @@ $$(document).on("pageInit", function(e) {
 	}
 
 }), $(document).ready(function() {
+	var isPendingInterstitial = false;
+	var isAutoshowInterstitial = false;
+
+	function prepareInterstitialAd() {
+		if (!isPendingInterstitial) { // We won't ask for another interstitial ad if we already have an available one
+			admob.requestInterstitialAd({
+				autoShowInterstitial: isAutoshowInterstitial
+			});
+		}
+	}
+
+	function onAdLoadedEvent(e) {
+		if (e.adType === admob.AD_TYPE.INTERSTITIAL && !isAutoshowInterstitial) {
+			isPendingInterstitial = true;
+		}
+	}
+	
+	function showInterstitialAd() {
+		if (isPendingInterstitial) {
+			admob.showInterstitialAd(function () {
+					isPendingInterstitial = false;
+					isAutoshowInterstitial = false;
+					prepareInterstitialAd();
+			});
+		} else {
+			// The interstitial is not prepared, so in this case, we want to show the interstitial as soon as possible
+			isAutoshowInterstitial = true;
+			admob.requestInterstitialAd({
+				autoShowInterstitial: isAutoshowInterstitial
+			});
+		}
+	}
+	
 	$$(".logout").on('click', function(e){
 		localStorage.removeItem("token");
 		$('#loginli').show();
