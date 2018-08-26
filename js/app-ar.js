@@ -1158,7 +1158,9 @@ $$(document).on('deviceready', function(){
 	}
 	
 	admob.requestInterstitialAd({
-		autoShowInterstitial: true
+	  publisherId:          "pub-1307086053466197",
+	  interstitialAdId:     "ca-app-pub-1307086053466197/8087372576",
+	  autoShowInterstitial: true
 	});
 
 });
