@@ -51,16 +51,22 @@ $$('.panel-left, .panel-right').on('close', function () {
 });
 
 $$(document).on("pageInit", function(e) {
+		// test to see if this works
+		admob.isInterstitialReady(function(isReady){
+			if(isReady){
+				admob.showInterstitial();
+			}
+		});
 	var adcounter=localStorage.getItem("adcounter");
 	adcounter=Number(adcounter)+1;
 	if (adcounter % 10 === 0) { // show the interstitial ad every 10 page views
 		admob.isInterstitialReady(function(isReady){
 			if(isReady){
-				alert("admob Interstitial loaded");
+				alert("hello");
 			}
 		});
 	} else {
-		admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_CENTER,admobParam);
+		admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_APP,admobParam);
 	}
 	localStorage.setItem("adcounter",adcounter); // set new value
 	console.log(localStorage.getItem("adcounter"));
@@ -1107,14 +1113,10 @@ $$(document).on('deviceready', function(){
    
 	var admobParam=new  admob.Params();
 	admobParam.isTesting=true;
-	
-	//admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_CENTER,admobParam);
-	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_APP,admobParam);
-   
+
 	// prepare interstitial
 	document.addEventListener(admob.Event.onInterstitialReceive, onInterstitialReceive, false);//show in ad receive event fun need add receive listener
 	admob.cacheInterstitial();// load admob Interstitial
-	admob.showInterstitial();
 
 	/*/ adincube ads
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
