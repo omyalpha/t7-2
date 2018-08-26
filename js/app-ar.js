@@ -1146,11 +1146,19 @@ $$(document).on('deviceready', function(){
 	localStorage.setItem("adcounter","0"); // ads counter
 	*/
 	// check if language is set
-	if (localStorage.getItem("language")==1) { // arabic
-		// redirect to indexar.html
-		window.location.replace("indexar.html");
-	} else if (localStorage.getItem("language")==2) { // English
-		// redirect to index.html
-		window.location.replace("index.html");
+	var internallink = page.query.internallink; // if user changed the lanhuage manuall don't change it
+	if (internallink!=1) {
+		if (localStorage.getItem("language")==1) { // arabic
+			// redirect to indexar.html
+			window.location.replace("indexar.html");
+		} else if (localStorage.getItem("language")==2) { // English
+			// redirect to index.html
+			window.location.replace("index.html");
+		}
 	}
+	
+	admob.requestInterstitialAd({
+		autoShowInterstitial: true
+	});
+
 });
