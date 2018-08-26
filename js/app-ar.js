@@ -54,7 +54,13 @@ $$(document).on("pageInit", function(e) {
 	var adcounter=localStorage.getItem("adcounter");
 	adcounter=Number(adcounter)+1;
 	if (adcounter % 10 === 0) { // show the interstitial ad every 10 page views
-		showInterstitialAd();
+		admob.isInterstitialReady(function(isReady){
+			if(isReady){
+				alert("admob Interstitial loaded");
+			}
+		});
+	} else {
+		admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_CENTER,admobParam);
 	}
 	localStorage.setItem("adcounter",adcounter); // set new value
 	console.log(localStorage.getItem("adcounter"));
@@ -1030,38 +1036,6 @@ $$(document).on("pageInit", function(e) {
 	}
 
 }), $(document).ready(function() {
-	var isPendingInterstitial = false;
-	var isAutoshowInterstitial = false;
-
-	function prepareInterstitialAd() {
-		if (!isPendingInterstitial) { // We won't ask for another interstitial ad if we already have an available one
-			admob.requestInterstitialAd({
-				autoShowInterstitial: isAutoshowInterstitial
-			});
-		}
-	}
-
-	function onAdLoadedEvent(e) {
-		if (e.adType === admob.AD_TYPE.INTERSTITIAL && !isAutoshowInterstitial) {
-			isPendingInterstitial = true;
-		}
-	}
-	
-	function showInterstitialAd() {
-		if (isPendingInterstitial) {
-			admob.showInterstitialAd(function () {
-					isPendingInterstitial = false;
-					isAutoshowInterstitial = false;
-					prepareInterstitialAd();
-			});
-		} else {
-			// The interstitial is not prepared, so in this case, we want to show the interstitial as soon as possible
-			isAutoshowInterstitial = true;
-			admob.requestInterstitialAd({
-				autoShowInterstitial: isAutoshowInterstitial
-			});
-		}
-	}
 	// language
 	$$("#choosearabic").on('click', function(e){
 		localStorage.setItem("language","1"); // Arabic
@@ -1129,15 +1103,14 @@ $$(document).on("pageInit", function(e) {
 	}
 });
 $$(document).on('deviceready', function(){
-    // Set AdMobAds options:
-    admob.setOptions({
-        publisherId:          "pub-1307086053466197",  // Required
-        interstitialAdId:     "ca-app-pub-1307086053466197/8087372576",  // Optional
-		overlap:              true,
-		isTesting:            true,
-		autoShowInterstitial: true
-    });
-	admob.createBannerView();
+	admob.initAdmob("ca-app-pub-1307086053466197/5199924161","ca-app-pub-1307086053466197/8087372576"); // bannerid , interstitial id
+   
+	var admobParam=new  admob.Params();
+	admobParam.isTesting=true;
+   
+	// prepare interstitial
+	document.addEventListener(admob.Event.onInterstitialReceive, onInterstitialReceive, false);//show in ad receive event fun need add receive listener
+	admob.cacheInterstitial();// load admob Interstitial
 
 	/*/ adincube ads
 	adincube.setAndroidAppKey('60e9c4eaee254702b017'); // or adincube.setIOSAppKey(...);
@@ -1157,7 +1130,6 @@ $$(document).on('deviceready', function(){
 			window.location.replace("index.html");
 		}
 	}
-	
-	admob.requestInterstitialAd();
+
 
 });

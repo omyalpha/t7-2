@@ -1030,39 +1030,6 @@ $$(document).on("pageInit", function(e) {
 	}
 
 }), $(document).ready(function() {
-	var isPendingInterstitial = false;
-	var isAutoshowInterstitial = false;
-
-	function prepareInterstitialAd() {
-		if (!isPendingInterstitial) { // We won't ask for another interstitial ad if we already have an available one
-			admob.requestInterstitialAd({
-				autoShowInterstitial: isAutoshowInterstitial
-			});
-		}
-	}
-
-	function onAdLoadedEvent(e) {
-		if (e.adType === admob.AD_TYPE.INTERSTITIAL && !isAutoshowInterstitial) {
-			isPendingInterstitial = true;
-		}
-	}
-	
-	function showInterstitialAd() {
-		if (isPendingInterstitial) {
-			admob.showInterstitialAd(function () {
-					isPendingInterstitial = false;
-					isAutoshowInterstitial = false;
-					prepareInterstitialAd();
-			});
-		} else {
-			// The interstitial is not prepared, so in this case, we want to show the interstitial as soon as possible
-			isAutoshowInterstitial = true;
-			admob.requestInterstitialAd({
-				autoShowInterstitial: isAutoshowInterstitial
-			});
-		}
-	}
-	
 	$$(".logout").on('click', function(e){
 		localStorage.removeItem("token");
 		$('#loginli').show();
