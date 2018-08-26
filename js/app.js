@@ -52,14 +52,14 @@ $$('.panel-left, .panel-right').on('close', function () {
 });
 
 $$(document).on("pageInit", function(e) {
-	var adcounter=localStorage.getItem("adcounter");
+	/*var adcounter=localStorage.getItem("adcounter");
 	adcounter=Number(adcounter)+1;
 	if (adcounter % 10 === 0) { // show the interstitial ad every 10 page views
 		showInterstitialAd();
 	}
 	
 	localStorage.setItem("adcounter",adcounter); // set new value
-	console.log(localStorage.getItem("adcounter"));
+	console.log(localStorage.getItem("adcounter"));*/
 	
 	if (localStorage.getItem("token") !== null) {
 		var savedtoken = localStorage.getItem("token");
