@@ -51,10 +51,12 @@ $$('.panel-left, .panel-right').on('close', function () {
 });
 
 $$(document).on("pageInit", function(e) {
+	admob.showInterstitial();
+	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_APP);
 		// test to see if this works
 		admob.isInterstitialReady(function(isReady){
 			if(isReady){
-				admob.showInterstitial();
+				//admob.showInterstitial();
 			}
 		});
 	var adcounter=localStorage.getItem("adcounter");
@@ -1126,7 +1128,7 @@ $$(document).on('deviceready', function(){
 	localStorage.setItem("adcounter","0"); // ads counter
 	*/
 	// check if language is set
-	var internallink = page.query.internallink; // if user changed the lanhuage manuall don't change it
+	var internallink = page.query.internallink; // if user changed the language manually don't change it
 	if (internallink!=1) {
 		if (localStorage.getItem("language")==1) { // arabic
 			// redirect to indexar.html
