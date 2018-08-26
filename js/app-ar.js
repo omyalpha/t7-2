@@ -1037,16 +1037,6 @@ $$(document).on("pageInit", function(e) {
 	}
 
 }), $(document).ready(function() {
-	// language
-	$$("#choosearabic").on('click', function(e){
-		localStorage.setItem("language","1"); // Arabic
-		window.location.replace("indexar.html");
-	});
-	$$("#chooseenglish").on('click', function(e){
-		localStorage.setItem("language","2"); // English
-		window.location.replace("index.html");
-	});
-	
 	$$(".logout").on('click', function(e){
 		localStorage.removeItem("token");
 		$('#loginli').show();
@@ -1121,17 +1111,4 @@ $$(document).on('deviceready', function(){
 	adincube.banner.show(adincube.banner.Size.BANNER_AUTO, adincube.banner.Position.BOTTOM);
 	localStorage.setItem("adcounter","0"); // ads counter
 	*/
-	// check if language is set
-	var internallink = page.query.internallink; // if user changed the language manually don't change it
-	if (internallink==undefined) {
-		if (localStorage.getItem("language")==1) { // arabic
-			// redirect to indexar.html
-			window.location.replace("indexar.html");
-		} else if (localStorage.getItem("language")==2) { // English
-			// redirect to index.html
-			window.location.replace("index.html");
-		}
-	}
-
-
 });
