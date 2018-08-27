@@ -314,7 +314,6 @@ $$(document).on("pageInit", function(e) {
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
-						console.log(data);
 						$.each(data, function(i, field){
 							divText += '<li><div class="item-content">';
 							divText += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green font-green">أريد دفع:</div>';
@@ -385,7 +384,6 @@ $$(document).on("pageInit", function(e) {
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
-						console.log(data);
 						$.each(data, function(i, field){
 							divText += '<li><div class="item-content">';
 							divText += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green font-green">أريد دفع:</div>';
@@ -454,16 +452,15 @@ $$(document).on("pageInit", function(e) {
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
-						console.log(data);
 						$.each(data, function(i, field){
 							divText += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
-					divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">أريد إرسال:</div>';
-					divText += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
-					divText += '<div class="font-green">من: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
-					divText += '<div class="font-red">إلى: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
-					divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
-					divText += '<a class="button button-link readmore" href="ar/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> عرض التفاصيل</a></li>';
+							divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">أريد إرسال:</div>';
+							divText += '<div class="item-after">' + data[i].from_currency + ' ' + data[i].from_amount + '</div></div><div class="item-title-row">';
+							divText += '<div class="font-green">من: ' + data[i].from_city + ', ' + data[i].from_country + '</div></div><div class="item-title-row">';
+							divText += '<div class="font-red">إلى: ' + data[i].to_city + ', ' + data[i].to_country + '</div></div>';
+							divText += '<div class="item-subtitle"><i class="fa fa-user"></i> ' + data[i].nameofuser + '</div>';
+							divText += '<div class="item-subtitle"><i class="fa fa-calendar-plus-o"></i> ' + data[i].created + '</div></div></div>';
+							divText += '<a class="button button-link readmore" href="ar/details.html?listingid=' + data[i].id + '"><i class="fa fa-eye"></i> عرض التفاصيل</a></li>';
 						});
 						$('#divTextArea').html(divText);
 						if (data=="") {
@@ -522,7 +519,6 @@ $$(document).on("pageInit", function(e) {
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
-						console.log(data);
 						$.each(data, function(i, field){
 							divText += '<li><div class="item-content">';
 							divText += '<div class="item-media"><img src="img/exchange-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">أريد دفع:</div>';
@@ -553,7 +549,6 @@ $$(document).on("pageInit", function(e) {
 		console.log('details page');
 		var getid = page.query.listingid;
 		//console.log(getid);
-		console.log(getid);
 		$('#cont1').hide();
 		$('#cont2').hide();
 		
@@ -611,7 +606,6 @@ $$(document).on("pageInit", function(e) {
 						});
 					});
 					// show save or delete
-					console.log(data[i].userid+'**********'+localStorage.getItem("id"));
 					if (data[i].userid==localStorage.getItem("id")) {
 						$('#cont2').show();
 					} else {
@@ -734,7 +728,6 @@ $$(document).on("pageInit", function(e) {
 		$$(".addlistingBtn").on('click', function(e){
 			var form = $("#addlistingForm");
 			check=form.serialize();
-			console.log(check);
 			
 			//run Ajax script here
 			$.ajax({
@@ -1018,10 +1011,10 @@ $$(document).on("pageInit", function(e) {
 				$('#activeListings').html(savedactiveListings);
 				$('#expiredListings').html(savedexpiredListings);
 				if (savedactiveListings=="") {
-					$('#savedactiveListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> لا توجد إعلانات نشطة في هذا القسم.</p></div>');
+					$('#activeListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> لا توجد إعلانات نشطة في هذا القسم.</p></div>');
 				}
 				if (savedexpiredListings=="") {
-					$('#savedexpiredListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> لا توجد إعلانات نشطة في هذا القسم.</p></div>');
+					$('#expiredListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> لا توجد إعلانات نشطة في هذا القسم.</p></div>');
 				}
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){

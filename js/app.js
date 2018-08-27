@@ -307,7 +307,6 @@ $$(document).on("pageInit", function(e) {
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
-						console.log(data);
 						$.each(data, function(i, field){
 							divText += '<li><div class="item-content">';
 							divText += '<div class="item-media"><img src="img/fromsudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green font-green">I want to give:</div>';
@@ -378,7 +377,6 @@ $$(document).on("pageInit", function(e) {
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
-						console.log(data);
 						$.each(data, function(i, field){
 							divText += '<li><div class="item-content">';
 							divText += '<div class="item-media"><img src="img/tosudan-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green font-green">I want to give:</div>';
@@ -447,7 +445,6 @@ $$(document).on("pageInit", function(e) {
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
-						console.log(data);
 						$.each(data, function(i, field){
 							divText += '<li><div class="item-content"><div class="item-media"><img src="img/domestic-icon.png" width="80"/></div>';
 							divText += '<div class="item-inner"><div class="item-title-row"><div class="item-subtitle">I want to send:</div>';
@@ -515,7 +512,6 @@ $$(document).on("pageInit", function(e) {
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
-						console.log(data);
 						$.each(data, function(i, field){
 							divText += '<li><div class="item-content">';
 							divText += '<div class="item-media"><img src="img/exchange-icon.png" width="80"/></div><div class="item-inner"><div class="item-subtitle font-green">I want to give:</div>';
@@ -546,7 +542,6 @@ $$(document).on("pageInit", function(e) {
 		console.log('details page');
 		var getid = page.query.listingid;
 		//console.log(getid);
-		console.log(getid);
 		$('#cont1').hide();
 		$('#cont2').hide();
 		
@@ -726,7 +721,6 @@ $$(document).on("pageInit", function(e) {
 		$$(".addlistingBtn").on('click', function(e){
 			var form = $("#addlistingForm");
 			check=form.serialize();
-			console.log(check);
 			
 			//run Ajax script here
 			$.ajax({
@@ -761,7 +755,6 @@ $$(document).on("pageInit", function(e) {
 		if (getid===undefined) { // if no id is set, show my listings
 			getid=localStorage.getItem("id");
 		}
-		console.log(getid);
 		
 		var activeListings="";
 		var expiredListings="";
@@ -1010,12 +1003,11 @@ $$(document).on("pageInit", function(e) {
 				$('#activeListings').html(savedactiveListings);
 				$('#expiredListings').html(savedexpiredListings);
 				if (savedactiveListings=="") {
-					$('#savedactiveListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+					$('#activeListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
 				}
 				if (savedexpiredListings=="") {
-					$('#savedexpiredListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
+					$('#expiredListings').html('<div class="content-block error center"><p><i class="fa fa-hand-stop-o"></i> No active listings in this section.</p></div>');
 				}
-				console.log(activeListings+'22222');
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
 				var errormsg=XMLHttpRequest.responseText;
