@@ -74,7 +74,7 @@ $$(document).on("pageInit", function(e) {
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
 			type: "GET",
-			url: "http://www.webhosting.sd/~tahweel/php/getdata.php",
+			url: "http://www.tahweelapp.com/php/getdata.php",
 			data: dataString, // send token to grab data
 			success: function(data) {
 			   obj = JSON.parse(data);
@@ -133,7 +133,7 @@ $$(document).on("pageInit", function(e) {
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
 			type: "GET",
-			url: "http://www.webhosting.sd/~tahweel/php/signup.php",
+			url: "http://www.tahweelapp.com/php/signup.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 			   localStorage.setItem("token",data);
@@ -175,7 +175,7 @@ $$(document).on("pageInit", function(e) {
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
 			type: "GET",
-			url: "http://www.webhosting.sd/~tahweel/php/login.php",
+			url: "http://www.tahweelapp.com/php/login.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 			   localStorage.setItem("token",data);
@@ -210,7 +210,7 @@ $$(document).on("pageInit", function(e) {
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
 			type: "GET",
-			url: "http://www.webhosting.sd/~tahweel/php/resetpass.php",
+			url: "http://www.tahweelapp.com/php/resetpass.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 				if (data=="13") {
@@ -247,7 +247,7 @@ $$(document).on("pageInit", function(e) {
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
 			type: "GET",
-			url: "http://www.webhosting.sd/~tahweel/php/settings.php",
+			url: "http://www.tahweelapp.com/php/settings.php",
 			data: form.serialize(), // serializes the form's elements.
 			success: function(data) {
 			   myApp.alert('تم تحديث البيانات');
@@ -278,7 +278,7 @@ $$(document).on("pageInit", function(e) {
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
-			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?type=1",
+			url: "http://www.tahweelapp.com/php/getlistings.php?type=1",
 			dataType: "jsonp",
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
@@ -310,7 +310,7 @@ $$(document).on("pageInit", function(e) {
 				$.ajax({
 					beforeSend: function() { myApp.showIndicator(); },
 					complete: function(){ myApp.hideIndicator(); },
-					url: "http://www.webhosting.sd/~tahweel/php/search.php?type=1&searchterm="+searchterm,
+					url: "http://www.tahweelapp.com/php/search.php?type=1&searchterm="+searchterm,
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
@@ -349,7 +349,7 @@ $$(document).on("pageInit", function(e) {
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
-			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?type=2",
+			url: "http://www.tahweelapp.com/php/getlistings.php?type=2",
 			dataType: "jsonp",
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
@@ -381,7 +381,7 @@ $$(document).on("pageInit", function(e) {
 				$.ajax({
 					beforeSend: function() { myApp.showIndicator(); },
 					complete: function(){ myApp.hideIndicator(); },
-					url: "http://www.webhosting.sd/~tahweel/php/search.php?type=2&searchterm="+searchterm,
+					url: "http://www.tahweelapp.com/php/search.php?type=2&searchterm="+searchterm,
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
@@ -420,7 +420,7 @@ $$(document).on("pageInit", function(e) {
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
-			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?type=3",
+			url: "http://www.tahweelapp.com/php/getlistings.php?type=3",
 			dataType: "jsonp",
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
@@ -450,7 +450,7 @@ $$(document).on("pageInit", function(e) {
 				$.ajax({
 					beforeSend: function() { myApp.showIndicator(); },
 					complete: function(){ myApp.hideIndicator(); },
-					url: "http://www.webhosting.sd/~tahweel/php/search.php?type=3&searchterm="+searchterm,
+					url: "http://www.tahweelapp.com/php/search.php?type=3&searchterm="+searchterm,
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
@@ -486,7 +486,7 @@ $$(document).on("pageInit", function(e) {
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
-			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?type=4",
+			url: "http://www.tahweelapp.com/php/getlistings.php?type=4",
 			dataType: "jsonp",
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
@@ -518,7 +518,7 @@ $$(document).on("pageInit", function(e) {
 				$.ajax({
 					beforeSend: function() { myApp.showIndicator(); },
 					complete: function(){ myApp.hideIndicator(); },
-					url: "http://www.webhosting.sd/~tahweel/php/search.php?type=4&searchterm="+searchterm,
+					url: "http://www.tahweelapp.com/php/search.php?type=4&searchterm="+searchterm,
 					dataType: "jsonp",
 					jsonpCallback: "jsonCallback",
 					success:function jsonCallback(data){
@@ -562,7 +562,7 @@ $$(document).on("pageInit", function(e) {
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
-			url: "http://www.webhosting.sd/~tahweel/php/getlistings.php?listingid="+getid,
+			url: "http://www.tahweelapp.com/php/getlistings.php?listingid="+getid,
 			dataType: "jsonp",
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
@@ -574,7 +574,7 @@ $$(document).on("pageInit", function(e) {
 							beforeSend: function() { myApp.showIndicator(); },
 							complete: function(){ myApp.hideIndicator(); },
 							type: "GET",
-							url: "http://www.webhosting.sd/~tahweel/php/save.php",
+							url: "http://www.tahweelapp.com/php/save.php",
 							data: dataString, // send token to grab data
 							success: function jsonCallback(data){
 								if (data=="11") {
@@ -601,7 +601,7 @@ $$(document).on("pageInit", function(e) {
 								beforeSend: function() { myApp.showIndicator(); },
 								complete: function(){ myApp.hideIndicator(); },
 								type: "GET",
-								url: "http://www.webhosting.sd/~tahweel/php/dellisting.php",
+								url: "http://www.tahweelapp.com/php/dellisting.php",
 								data: dataString, // send token to grab data
 								success: function jsonCallback(data){
 									myApp.alert('تم حذف الإعلان');
@@ -741,7 +741,7 @@ $$(document).on("pageInit", function(e) {
 				beforeSend: function() { myApp.showIndicator(); },
 				complete: function(){ myApp.hideIndicator(); },
 				type: "GET",
-				url: "http://www.webhosting.sd/~tahweel/php/addlisting.php",
+				url: "http://www.tahweelapp.com/php/addlisting.php",
 				data: form.serialize(), // serializes the form's elements.
 				success: function(data) {
 				   myApp.alert('تم إضافة الإعلان');
@@ -777,7 +777,7 @@ $$(document).on("pageInit", function(e) {
 		//get nameofuser
 		$.ajax({
 			type: "GET",
-			url: "http://www.webhosting.sd/~tahweel/php/getnameofuser.php?getid="+getid,
+			url: "http://www.tahweelapp.com/php/getnameofuser.php?getid="+getid,
 			success: function(data) {
 			   $('#nameofuser').text(data);
 			},
@@ -787,7 +787,7 @@ $$(document).on("pageInit", function(e) {
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
-			url: "http://www.webhosting.sd/~tahweel/php/userlistings.php?getid="+getid,
+			url: "http://www.tahweelapp.com/php/userlistings.php?getid="+getid,
 			dataType: "jsonp",
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
@@ -915,7 +915,7 @@ $$(document).on("pageInit", function(e) {
 		$.ajax({
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
-			url: "http://www.webhosting.sd/~tahweel/php/savedlistings.php?token="+localStorage.getItem("token"),
+			url: "http://www.tahweelapp.com/php/savedlistings.php?token="+localStorage.getItem("token"),
 			dataType: "jsonp",
 			jsonpCallback: "jsonCallback",
 			success:function jsonCallback(data){
@@ -1061,7 +1061,7 @@ $$(document).on("pageInit", function(e) {
 			beforeSend: function() { myApp.showIndicator(); },
 			complete: function(){ myApp.hideIndicator(); },
 			type: "GET",
-			url: "http://www.webhosting.sd/~tahweel/php/getdata.php",
+			url: "http://www.tahweelapp.com/php/getdata.php",
 			data: dataString, // send token to grab data
 			success: function jsonCallback(data){
 				obj = JSON.parse(data);
