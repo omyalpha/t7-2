@@ -1097,7 +1097,7 @@ $$(document).on('deviceready', function(){
 	admob.initAdmob("ca-app-pub-1307086053466197/5199924161","ca-app-pub-1307086053466197/8087372576"); // bannerid , interstitial id
    
 	var admobParam=new  admob.Params();
-	admobParam.isTesting=true;
+	admobParam.isTesting=false;
 	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_APP,admobParam);
 
 	// prepare interstitial
