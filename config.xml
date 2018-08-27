@@ -57,4 +57,5 @@
 	<preference name="SplashScreenDelay" value="5000" />
 	<preference name="orientation" value="portrait" />
 	<preference name="ShowSplashScreenSpinner" value="false"/>
+	<preference name="android-minSdkVersion" value="26" />
 </widget>
