@@ -89,7 +89,13 @@ $$(document).on("pageInit", function(e) {
 			   $('.myname').html(obj[0].name);
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
-				errormsg=alert(XMLHttpRequest.responseText);
+				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="1") {
+					errormsg="خطأ في التعريف!";
+				} else {
+					errormsg="خطأ في الإتصال!";
+				}
+				
 				myApp.alert(errormsg);
 			}
 		});
@@ -158,6 +164,8 @@ $$(document).on("pageInit", function(e) {
 					errormsg="البريد الإلكتروني غير متاح!";
 				} else if (errormsg=="6") {
 					errormsg="صيغة البريد الإلكتروني غير صحيحة!";
+				} else {
+					errormsg="خطأ في الإتصال!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -193,6 +201,8 @@ $$(document).on("pageInit", function(e) {
 				var errormsg=XMLHttpRequest.responseText;
 				if (errormsg=="3") {
 					errormsg="بيانات الدخول غير صحيحة!";
+				} else {
+					errormsg="خطأ في الإتصال!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -225,6 +235,8 @@ $$(document).on("pageInit", function(e) {
 				var errormsg=XMLHttpRequest.responseText;
 				if (errormsg=="9") {
 					errormsg="البريد الإلكتروني غير صحيح!";
+				} else {
+					errormsg="خطأ في الإتصال!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -264,6 +276,8 @@ $$(document).on("pageInit", function(e) {
 					errormsg="البريد الإلكتروني غير متاح!";
 				} else if (errormsg=="6") {
 					errormsg="صيغة البريد الإلكتروني غير صحيحة!";
+				} else {
+					errormsg="خطأ في الإتصال!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -584,6 +598,8 @@ $$(document).on("pageInit", function(e) {
 								var errormsg=XMLHttpRequest.responseText;
 								if (errormsg=="12") {
 									errormsg="فشل في الحفظ!";
+								} else {
+									errormsg="خطأ في الإتصال!";
 								}
 								myApp.alert(errormsg);
 							}
@@ -768,6 +784,8 @@ $$(document).on("pageInit", function(e) {
 						errormsg="كل البيانات مطلوبة!";
 					} else if (errormsg=="10") {
 						errormsg="لا يمكنك إضافة أكثر من ثلاثة إعلانات نشطة!";
+					} else {
+						errormsg="خطأ في الإتصال!";
 					}
 					myApp.alert(errormsg);
 				}
@@ -913,6 +931,8 @@ $$(document).on("pageInit", function(e) {
 				var errormsg=XMLHttpRequest.responseText;
 				if (errormsg=="8") {
 					errormsg="فشل في تحديد الحساب!";
+				} else {
+					errormsg="خطأ في الإتصال!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -1043,6 +1063,8 @@ $$(document).on("pageInit", function(e) {
 					errormsg="حسابك غير محدد!";
 				} else if (errormsg=="7") {
 					errormsg="حسابك غير محدد!";
+				} else {
+					errormsg="خطأ في الإتصال!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -1084,6 +1106,8 @@ $$(document).on("pageInit", function(e) {
 				var errormsg=XMLHttpRequest.responseText;
 				if (errormsg=="1") {
 					errormsg="حسابك غير محدد!";
+				} else {
+					errormsg="خطأ في الإتصال!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -1110,7 +1134,7 @@ $$(document).on('deviceready', function(){
 	admob.initAdmob("ca-app-pub-1307086053466197/5199924161","ca-app-pub-1307086053466197/8087372576"); // bannerid , interstitial id
    
 	var admobParam=new  admob.Params();
-	admobParam.isTesting=true;
+	admobParam.isTesting=false;
 	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_APP,admobParam);
 
 	// prepare interstitial

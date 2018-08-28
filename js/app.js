@@ -84,7 +84,14 @@ $$(document).on("pageInit", function(e) {
 			   $('.myname').html(obj[0].name);
 			},
 			error:function(XMLHttpRequest,textStatus,errorThrown){
-				alert(XMLHttpRequest.responseText);
+				var errormsg=XMLHttpRequest.responseText;
+				if (errormsg=="1") {
+					errormsg="Wrong token!";
+				} else {
+					errormsg="Connection Error!";
+				}
+				
+				myApp.alert(errormsg);
 			}
 		});
 		$('#loginli').hide();
@@ -152,6 +159,8 @@ $$(document).on("pageInit", function(e) {
 					errormsg="Email is already registered!";
 				} else if (errormsg=="6") {
 					errormsg="Invalid email!";
+				} else {
+					errormsg="Connection Error!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -187,6 +196,8 @@ $$(document).on("pageInit", function(e) {
 				var errormsg=XMLHttpRequest.responseText;
 				if (errormsg=="3") {
 					errormsg="Wrong login!";
+				} else {
+					errormsg="Connection Error!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -219,6 +230,8 @@ $$(document).on("pageInit", function(e) {
 				var errormsg=XMLHttpRequest.responseText;
 				if (errormsg=="9") {
 					errormsg="Wrong email!";
+				} else {
+					errormsg="Connection Error!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -257,6 +270,8 @@ $$(document).on("pageInit", function(e) {
 					errormsg="Email is already registered!";
 				} else if (errormsg=="6") {
 					errormsg="Invalid email!";
+				} else {
+					errormsg="Connection Error!";
 				}
 				var errormsg=XMLHttpRequest.responseText;
 				myApp.alert(errormsg);
@@ -577,6 +592,8 @@ $$(document).on("pageInit", function(e) {
 								var errormsg=XMLHttpRequest.responseText;
 								if (errormsg=="12") {
 									errormsg="Save failed!";
+								} else {
+									errormsg="Connection Error!";
 								}
 								myApp.alert(errormsg);
 							}
@@ -760,6 +777,8 @@ $$(document).on("pageInit", function(e) {
 						errormsg="All fields are required!";
 					} else if (errormsg=="10") {
 						errormsg="You have reached your maximum of three active listings!";
+					} else {
+						errormsg="Connection Error!";
 					}
 					myApp.alert(errormsg);
 				}
@@ -904,6 +923,8 @@ $$(document).on("pageInit", function(e) {
 				var errormsg=XMLHttpRequest.responseText;
 				if (errormsg=="8") {
 					errormsg="No ID!";
+				} else {
+					errormsg="Connection Error!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -1034,6 +1055,8 @@ $$(document).on("pageInit", function(e) {
 					errormsg="Wrong token!";
 				} else if (errormsg=="7") {
 					errormsg="Missing token!";
+				} else {
+					errormsg="Connection Error!";
 				}
 				myApp.alert(errormsg);
 			}
@@ -1075,6 +1098,8 @@ $$(document).on("pageInit", function(e) {
 				var errormsg=XMLHttpRequest.responseText;
 				if (errormsg=="1") {
 					errormsg="Wrong token!";
+				} else {
+					errormsg="Connection Error!";
 				}
 				myApp.alert(errormsg);
 			}
