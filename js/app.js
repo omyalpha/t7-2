@@ -95,7 +95,7 @@ $$(document).on("pageInit", function(e) {
 			}
 		});
 		$('#loginli').hide();
-		$('#logoutli').show();
+		//$('#logoutli').show();
 		$('#settingsli').show();
 		$('#mylistings').show();
 		$('#addlisting').show();
@@ -103,7 +103,7 @@ $$(document).on("pageInit", function(e) {
 		$('.speed-dial').show();
 	} else {
 		$('#loginli').show();
-		$('#logoutli').hide();
+		//$('#logoutli').hide();
 		$('#settingsli').hide();
 		$('#mylistings').hide();
 		$('#addlisting').hide();
@@ -141,7 +141,7 @@ $$(document).on("pageInit", function(e) {
 			   myApp.alert('Account created');
 			   localStorage.setItem("token",data);
 			   $('#loginli').hide();
-			   $('#logoutli').show();
+			   //$('#logoutli').show();
 			   $('#settingsli').show();
 			   $('#mylistings').show();
 			   $('#addlisting').show();
@@ -184,7 +184,7 @@ $$(document).on("pageInit", function(e) {
 			success: function(data) {
 			   localStorage.setItem("token",data);
 			   $('#loginli').hide();
-		   	   $('#logoutli').show();
+		   	   //$('#logoutli').show();
 			   $('#settingsli').show();
 			   $('#mylistings').show();
 			   $('#addlisting').show();
@@ -1067,7 +1067,7 @@ $$(document).on("pageInit", function(e) {
 	$$(".logout").on('click', function(e){
 		localStorage.removeItem("token");
 		$('#loginli').show();
-		$('#logoutli').hide();
+		//$('#logoutli').hide();
 		$('#settingsli').hide();
 		$('#mylistings').hide();
 		$('#addlisting').hide();
@@ -1105,7 +1105,7 @@ $$(document).on("pageInit", function(e) {
 			}
 		});
 		$('#loginli').hide();
-		$('#logoutli').show();
+		//$('#logoutli').show();
 		$('#settingsli').show();
 		$('#mylistings').show();
 		$('#addlisting').show();
@@ -1113,7 +1113,7 @@ $$(document).on("pageInit", function(e) {
 		$('.speed-dial').show();
 	} else {
 		$('#loginli').show();
-		$('#logoutli').hide();
+		//$('#logoutli').hide();
 		$('#settingsli').hide();
 		$('#mylistings').hide();
 		$('#addlisting').hide();
